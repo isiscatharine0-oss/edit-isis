@@ -1,0 +1,19 @@
+{
+  "origin": "usuaria",
+  "run": {
+    "label": "Perfis de referência informados pela Isis",
+    "region": "Salvador - BA",
+    "sources": ["Briefing da Isis Social Media"],
+    "limitations": [
+      "Perfis ainda não analisados: o Instagram não é acessível por meio autorizado neste ambiente. Adicione as observações na aba Evidências de cada perfil."
+    ]
+  },
+  "leads": [
+    { "name": "@eneidabonanza", "instagram": "@eneidabonanza", "city": "Salvador", "reference_label": "ideal",
+      "notes": "Referência subjetiva de compatibilidade indicada pela Isis. Motivo detalhado ainda não registrado." },
+    { "name": "@larissamelo.neuropsi", "instagram": "@larissamelo.neuropsi", "city": "Salvador", "reference_label": "ideal",
+      "notes": "Referência subjetiva de compatibilidade indicada pela Isis. Motivo detalhado ainda não registrado." },
+    { "name": "@alineeaodonpediatria", "instagram": "@alineeaodonpediatria", "city": "Salvador", "reference_label": "ideal",
+      "notes": "Referência subjetiva de compatibilidade indicada pela Isis. Motivo detalhado ainda não registrado." }
+  ]
+}

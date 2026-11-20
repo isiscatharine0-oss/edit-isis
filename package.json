@@ -1,0 +1,17 @@
+{
+  "name": "isis-prospeccao",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Agente de prospecção comercial da Isis Social Media — MVP",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=22.5"
+  },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning src/server.js",
+    "test": "node --disable-warning=ExperimentalWarning --test test/*.test.js",
+    "import": "node --disable-warning=ExperimentalWarning src/cli-import.js",
+    "seed:referencias": "node --disable-warning=ExperimentalWarning src/cli-import.js data/seeds/referencias.json",
+    "seed:demo": "node --disable-warning=ExperimentalWarning src/cli-import.js data/seeds/demo-ficticio.json"
+  }
+}

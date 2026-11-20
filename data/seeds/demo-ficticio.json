@@ -1,0 +1,143 @@
+{
+  "run": {
+    "label": "Demonstração (dados fictícios)",
+    "region": "Salvador - BA",
+    "is_demo": true,
+    "sources": [
+      "Dados fictícios para demonstrar o fluxo"
+    ],
+    "limitations": [
+      "Todos os registros são FICTÍCIOS. Domínios .invalid não existem."
+    ]
+  },
+  "leads": [
+    {
+      "name": "Dra. Helena Exemplo (FICTÍCIA)",
+      "address_as": "doutora",
+      "specialty": "Neurologia",
+      "city": "Salvador",
+      "neighborhood": "Itaigara",
+      "instagram": "@demo.helena.exemplo",
+      "website": "https://helena.exemplo.invalid",
+      "evidence": [
+        {
+          "criterion": "estrutura",
+          "signal": "consultorio_proprio",
+          "description": "(FICTÍCIO) Site apresenta consultório próprio no Itaigara.",
+          "source_name": "Site fictício",
+          "url": "https://helena.exemplo.invalid/consultorio",
+          "reliability": "verificado"
+        },
+        {
+          "criterion": "estrutura",
+          "signal": "atendimento_particular",
+          "description": "(FICTÍCIO) Site informa atendimento exclusivamente particular.",
+          "source_name": "Site fictício",
+          "url": "https://helena.exemplo.invalid/agendamento",
+          "reliability": "verificado"
+        },
+        {
+          "criterion": "estrutura",
+          "signal": "equipe",
+          "description": "(FICTÍCIO) Página \"Equipe\" lista secretária e enfermeira.",
+          "source_name": "Site fictício",
+          "url": "https://helena.exemplo.invalid/equipe",
+          "reliability": "verificado"
+        },
+        {
+          "criterion": "marketing",
+          "signal": "baixa_presenca_profissional",
+          "description": "(FICTÍCIO) Aparece em 2 dos 12 últimos posts.",
+          "source_name": "Instagram (observação)",
+          "url": "https://www.instagram.com/demo.helena.exemplo/",
+          "reliability": "observado"
+        },
+        {
+          "criterion": "marketing",
+          "signal": "estrutura_maior_que_comunicacao",
+          "description": "(FICTÍCIO) Estrutura robusta, posts majoritariamente com artes genéricas.",
+          "source_name": "Instagram (observação)",
+          "url": "https://www.instagram.com/demo.helena.exemplo/",
+          "reliability": "observado"
+        },
+        {
+          "criterion": "autoridade",
+          "signal": "trajetoria_verificavel",
+          "description": "(FICTÍCIO) Registro e título de especialista informados no site.",
+          "source_name": "Site fictício",
+          "url": "https://helena.exemplo.invalid/sobre",
+          "reliability": "verificado"
+        },
+        {
+          "criterion": "autoridade",
+          "signal": "eventos_congressos",
+          "description": "(FICTÍCIO) Palestrante em congresso regional.",
+          "source_name": "Programação de evento fictício",
+          "url": "https://evento.exemplo.invalid/programacao",
+          "reliability": "verificado"
+        },
+        {
+          "criterion": "momento",
+          "signal": "inauguracao_ampliacao",
+          "description": "(FICTÍCIO) Post anunciando ampliação do consultório.",
+          "source_name": "Instagram (post)",
+          "url": "https://www.instagram.com/demo.helena.exemplo/",
+          "reliability": "verificado",
+          "hook_type": "inauguracao",
+          "hook_text": "ampliou o consultório com duas novas salas"
+        }
+      ]
+    },
+    {
+      "name": "Dr. Rafael Exemplo (FICTÍCIO)",
+      "address_as": "doutor",
+      "specialty": "Pediatria",
+      "city": "Lauro de Freitas",
+      "instagram": "@demo.rafael.exemplo",
+      "evidence": [
+        {
+          "criterion": "estrutura",
+          "signal": "consultorio_proprio",
+          "description": "(FICTÍCIO) Ficha pública indica consultório próprio.",
+          "source_name": "Diretório fictício",
+          "url": "https://diretorio.exemplo.invalid/rafael",
+          "reliability": "indireto"
+        },
+        {
+          "criterion": "marketing",
+          "signal": "marketing_estruturado",
+          "description": "(FICTÍCIO) Perfil com reels semanais, identidade visual consistente e produção profissional.",
+          "source_name": "Instagram (observação)",
+          "url": "https://www.instagram.com/demo.rafael.exemplo/",
+          "reliability": "observado"
+        },
+        {
+          "criterion": "autoridade",
+          "signal": "producao_conhecimento",
+          "description": "(FICTÍCIO) Coautor de artigo científico.",
+          "source_name": "Repositório fictício",
+          "url": "https://artigos.exemplo.invalid/123",
+          "reliability": "verificado",
+          "hook_type": "conquista",
+          "hook_text": "publicou um artigo sobre sono na primeira infância"
+        }
+      ]
+    },
+    {
+      "name": "Dra. Marina Exemplo (FICTÍCIA)",
+      "address_as": "Marina",
+      "specialty": "Psiquiatria",
+      "city": "Salvador",
+      "evidence": [
+        {
+          "criterion": "estrutura",
+          "signal": "atendimento_particular",
+          "description": "(FICTÍCIO) Hipótese: atendimento particular, sem confirmação.",
+          "source_name": "Interpretação do agente",
+          "url": null,
+          "reliability": "hipotese"
+        }
+      ]
+    }
+  ]
+}

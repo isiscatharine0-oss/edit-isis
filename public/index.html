@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prospecção · Isis Social Media</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#/"><span class="brand-mark">I</span><span><strong>Isis Social Media</strong><small>Prospecção</small></span></a>
+    <button class="menu-toggle" data-action="toggle-menu" aria-label="Abrir menu">☰</button>
+    <nav id="nav">
+      <a href="#/">Painel</a>
+      <a href="#/leads">Leads</a>
+      <a href="#/referencias">Referências</a>
+      <a href="#/rodadas">Rodadas</a>
+      <a href="#/aprendizado">Aprendizado</a>
+      <a href="#/indicadores">Indicadores</a>
+      <a href="#/config">Configurações</a>
+    </nav>
+  </header>
+  <main id="view" aria-live="polite"></main>
+  <div id="modal" class="modal" hidden></div>
+  <div id="toast" class="toast" hidden></div>
+  <script src="app.js"></script>
+</body>
+</html>
