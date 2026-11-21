@@ -73,6 +73,8 @@ const FOLLOWUPS = [
 
 function addressOf(lead) {
   if (lead.address_as && lead.address_as.trim()) return lead.address_as.trim();
+  const m = String(lead.name || '').match(/^(Dra?\.)\s+(\S+)/i);
+  if (m) return `${m[1].charAt(0).toUpperCase()}${m[1].slice(1).toLowerCase()} ${m[2]}`;
   const first = String(lead.name || '').replace(/^(dra?\.?|dr\.?)\s+/i, '').split(/\s+/)[0];
   return first || 'tudo bem';
 }
@@ -117,6 +119,23 @@ function generate(p) {
   return { text: `${salut} ${v.t(hook)}`, template_id: v.id };
 }
 
+// Formato "ideia de conteúdo" — estrutura extraída de uma mensagem real da Isis (set/2026):
+// observação específica sobre como a pessoa comunica → ideia concreta de quadro → por que combina → pergunta aberta.
+// A ideia em si é criativa: vem da Isis (ou de um rascunho escrito com ela); o sistema só monta e valida.
+function generateIdea(lead, idea) {
+  const need = ['observacao', 'nome', 'descricao'];
+  for (const k of need) if (!String((idea || {})[k] || '').trim()) throw new Error('Preencha observação, nome do quadro e descrição da ideia.');
+  const clean = (s) => String(s).trim().replace(/[.!\s]+$/, '');
+  const obs = clean(idea.observacao).replace(/^(a forma como )?(você )/i, '');
+  const desc = clean(idea.descricao).replace(/^(em cada vídeo, )?(você )?(poderia )/i, '');
+  const why = idea.porque ? clean(idea.porque).replace(/^(pode )?(ajudar )?(o público a )/i, '') : '';
+  const t = addressOf(lead);
+  return `Oi, ${t}! Conheci seu perfil e gostei muito da forma como você ${obs}.\n\n`
+    + `Enquanto olhava seus conteúdos, tive a ideia de um quadro chamado “${clean(idea.nome).replace(/^["“]|["”]$/g, '')}”. Em cada vídeo, você poderia ${desc}.`
+    + (why ? ` Acredito que esse formato combina muito com a sua proposta e pode ajudar o público a ${why}.` : '')
+    + `\n\nO que você acha dessa ideia?`;
+}
+
 // ---- Validação: regras do estilo da Isis ----
 const HARD_RULES = [
   { code: 'promessa', re: /\b(garant\w*|resultado[s]? (certo|garantido)|vou (te )?trazer|mais pacientes|\d+\s*pacientes|lotar (a |sua )?agenda)\b/i,
@@ -128,7 +147,7 @@ const HARD_RULES = [
 const SOFT_RULES = [
   { code: 'elogio_generico', re: /\b(perfil (incr[ií]vel|maravilhoso|lindo)|maravilhos\w*|incr[ií]vel|perfeit\w*|sensacional)\b/i,
     message: 'Elogio genérico ou exagerado.' },
-  { code: 'pitch_primeiro_contato', re: /\b(social media|gest[aã]o de redes|marketing|meus servi[cç]os|minha ag[eê]ncia|proposta)\b/i,
+  { code: 'pitch_primeiro_contato', re: /\b(social media|gest[aã]o de redes|marketing|meus servi[cç]os|minha ag[eê]ncia|(minha|nossa|uma) proposta( comercial)?|proposta comercial)\b/i,
     message: 'Apresentação comercial no primeiro contato.', purposes: ['inicial'] },
   { code: 'mensagem_automatica', re: /\b(prezad[oa]|venho por meio|gostar[ií]amos de apresentar|nossa empresa)\b/i,
     message: 'Formalidade excessiva / soa como disparo automático.' },
@@ -143,7 +162,7 @@ function validate(text, opts = {}) {
     if (r.purposes && !r.purposes.includes(purpose)) continue;
     if (r.re.test(text)) warnings.push({ code: r.code, message: r.message });
   }
-  const limit = purpose === 'resposta' ? 600 : opts.channel === 'story' ? 160 : 350;
+  const limit = purpose === 'resposta' ? 600 : opts.channel === 'story' ? 160 : opts.channel === 'ideia' ? 800 : 350;
   if (text.length > limit) warnings.push({ code: 'longa', message: `Mensagem longa (${text.length} caracteres; ideal até ${limit}).` });
   if ((text.match(/!/g) || []).length > 3) warnings.push({ code: 'exclamacoes', message: 'Muitas exclamações.' });
   for (const ph of avoidPhrases) {
@@ -163,4 +182,4 @@ function removedSentences(before, after) {
   return split(before).filter((s) => !afterNorm.includes(s.toLowerCase()));
 }
 
-module.exports = { generate, validate, countQuestions, removedSentences, addressOf, OPENERS, STORY };
+module.exports = { generate, generateIdea, validate, countQuestions, removedSentences, addressOf, OPENERS, STORY };

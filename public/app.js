@@ -350,7 +350,12 @@ function renderOutreachTab(tab, d) {
     ${!approved ? '<div class="banner info">Aprove o profissional (1ª aprovação) para gerar a abordagem.</div>' : ''}
     <div class="card"><h2>Gerar abordagem</h2>
       ${hooks.length ? `<form id="gen-form" class="actions"><label style="flex:1;min-width:240px">Fato real usado como referência<select name="evidence_id">${hooks.map((e) => `<option value="${e.id}">${esc(META.hook_types[e.hook_type])}: ${esc(e.hook_text)}</option>`).join('')}</select></label>
-        <label>Canal<select name="channel"><option value="direct">Direct (mensagem)</option><option value="story">Resposta a story</option></select></label>
+        <label>Canal<select name="channel"><option value="direct">Direct (mensagem)</option><option value="story">Resposta a story</option><option value="ideia">Ideia de conteúdo (estilo Isis)</option></select></label>
+        <div class="form-grid" id="idea-fields" hidden style="flex-basis:100%">
+          <label class="full">Gostei muito da forma como você…<input name="observacao" placeholder="fala sobre longevidade a partir da prevenção"></label>
+          <label>Nome do quadro<input name="nome" placeholder="Isso é da idade mesmo?"></label>
+          <label class="full">Em cada vídeo, você poderia…<input name="descricao" placeholder="partir de situações que as pessoas normalizam…"></label>
+          <label class="full">Pode ajudar o público a… (opcional)<input name="porque" placeholder="perceber que envelhecer bem…"></label></div>
         <button class="btn primary" type="submit" ${!approved || sentInitial || l.do_not_contact ? 'disabled' : ''}>Gerar mensagem inicial</button></form>`
         : '<p class="muted">Nenhum fato verificável marcado como referência de abordagem. Na aba Evidências, marque “usar como referência”.</p>'}
       <div class="actions" style="margin-top:.6rem"><button class="btn" data-action="followup" ${!sentInitial || l.do_not_contact ? 'disabled' : ''}>Gerar retomada (máx. 1)</button>
@@ -359,7 +364,7 @@ function renderOutreachTab(tab, d) {
     </div>
     ${visible.map((m) => { const [lab, tone] = apStatus[m.approval_status]; const active = ['rascunho', 'aprovada'].includes(m.approval_status) && m.send_status !== 'enviada'; return `
       <div class="msg ${m.approval_status === 'rejeitada' ? 'inactive' : ''}" data-msg="${m.id}">
-        <div class="actions"><strong>${esc({ inicial: 'Mensagem inicial', retomada: 'Retomada', resposta: 'Resposta' }[m.purpose])} · v${m.version}</strong>${m.channel === 'story' ? ' <span class="tag info">Resposta a story</span>' : ''}
+        <div class="actions"><strong>${esc({ inicial: 'Mensagem inicial', retomada: 'Retomada', resposta: 'Resposta' }[m.purpose])} · v${m.version}</strong>${m.channel === 'story' ? ' <span class="tag info">Resposta a story</span>' : m.channel === 'ideia' ? ' <span class="tag brand">Ideia de conteúdo</span>' : ''}
           <span class="tag ${tone}">${lab}</span>
           <span class="tag ${m.send_status === 'enviada' ? 'ok' : ''}">${m.send_status === 'enviada' ? `Enviada em ${fmtDateTime(m.sent_at)}` : 'Não enviada'}</span></div>
         <small class="muted">Referência: ${esc(m.reference_text || '—')} · gerador: ${esc(m.generator)}${m.edits.length ? ` · ${m.edits.length} edição(ões)` : ''}</small>
@@ -377,7 +382,15 @@ function renderOutreachTab(tab, d) {
     ${old.length ? `<details class="card"><summary>Versões substituídas (${old.length})</summary><ul class="list">${old.map((m) => `<li><small>v${m.version} · ${fmtDateTime(m.created_at)}</small><br>${esc(m.text)}</li>`).join('')}</ul></details>` : ''}`;
 
   const gen = tab.querySelector('#gen-form');
-  if (gen) gen.addEventListener('submit', async (e) => { e.preventDefault(); await run(() => api('POST', `/api/leads/${l.id}/messages`, { purpose: 'inicial', evidence_id: gen.evidence_id.value, channel: gen.channel.value }), 'Rascunho gerado'); viewLead(l.id); });
+  if (gen) {
+    gen.channel.addEventListener('change', () => { gen.querySelector('#idea-fields').hidden = gen.channel.value !== 'ideia'; });
+    gen.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const body = { purpose: 'inicial', evidence_id: gen.evidence_id.value, channel: gen.channel.value };
+      if (body.channel === 'ideia') body.idea = { observacao: gen.observacao.value, nome: gen.nome.value, descricao: gen.descricao.value, porque: gen.porque.value };
+      await run(() => api('POST', `/api/leads/${l.id}/messages`, body), 'Rascunho gerado'); viewLead(l.id);
+    });
+  }
   tab.querySelector('[data-action="followup"]').addEventListener('click', async () => { await run(() => api('POST', `/api/leads/${l.id}/messages`, { purpose: 'retomada' }), 'Retomada gerada'); viewLead(l.id); });
   tab.querySelectorAll('[data-msg]').forEach((box) => {
     const id = box.dataset.msg;

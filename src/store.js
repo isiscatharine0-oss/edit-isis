@@ -261,7 +261,14 @@ function createStore(db) {
     if (!OUTREACH_OK.includes(lead.status) && lead.status !== 'nao_contatar') throw new RuleError('Aprove o profissional antes de gerar uma abordagem (primeira aprovação).');
 
     let text; let templateId = null; let evidence = null; let referenceText = null; let generator = 'modelo-local'; let channel = 'direct';
-    if (purpose === 'inicial') {
+    if (purpose === 'inicial' && opts.channel === 'ideia') {
+      if (sentInitial) throw new RuleError('A mensagem inicial já foi enviada. Use retomada ou resposta.');
+      const solid = q("SELECT COUNT(*) n FROM evidence WHERE lead_id = ? AND reliability <> 'hipotese'").get(leadId).n;
+      if (!solid) throw new RuleError('Registre ao menos uma evidência real do perfil antes de propor uma ideia.');
+      try { text = messages.generateIdea(lead, opts.idea); } catch (e) { throw new RuleError(e.message); }
+      channel = 'ideia'; generator = 'estilo-isis-ideia';
+      referenceText = `Ideia de conteúdo: “${String(opts.idea.nome).trim()}” — a partir de: ${String(opts.idea.observacao).trim()}`;
+    } else if (purpose === 'inicial') {
       if (sentInitial) throw new RuleError('A mensagem inicial já foi enviada. Use retomada ou resposta.');
       const evs = q("SELECT * FROM evidence WHERE lead_id = ? AND hook_type IS NOT NULL AND reliability <> 'hipotese' ORDER BY id DESC").all(leadId);
       evidence = opts.evidence_id ? evs.find((e) => e.id === Number(opts.evidence_id)) : evs[0];

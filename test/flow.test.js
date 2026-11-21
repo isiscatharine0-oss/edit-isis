@@ -255,3 +255,19 @@ test('resposta a story: curta, sem saudação formal, com alerta de story antigo
   store.decideLead(l2.id, 'aprovar');
   assert.ok(store.generateMessage(l2.id, { channel: 'story' }).warnings.some((w) => w.code === 'story_expirado'));
 });
+
+test('ideia de conteúdo reproduz a estrutura da mensagem real da Isis', () => {
+  const { store } = fresh();
+  const { lead } = store.createLead({ name: 'Dra. Mirela Exemplo', city: 'Salvador' });
+  store.addEvidence(lead.id, ev());
+  store.decideLead(lead.id, 'aprovar');
+  assert.throws(() => store.generateMessage(lead.id, { channel: 'ideia', idea: { nome: 'X' } }), /Preencha/);
+  const m = store.generateMessage(lead.id, { channel: 'ideia', idea: {
+    observacao: 'fala sobre longevidade a partir da prevenção', nome: 'Isso é da idade mesmo?',
+    descricao: 'partir de situações que muitas pessoas normalizam com o passar dos anos', porque: 'perceber que envelhecer bem não é aceitar todo desconforto' } });
+  assert.match(m.text, /^Oi, Dra\. Mirela! Conheci seu perfil e gostei muito da forma como você fala sobre longevidade/);
+  assert.match(m.text, /quadro chamado “Isso é da idade mesmo\?”\. Em cada vídeo, você poderia partir/);
+  assert.match(m.text, /O que você acha dessa ideia\?$/);
+  assert.equal(m.channel, 'ideia');
+  assert.deepEqual(m.warnings.filter((w) => w.code === 'longa'), []);
+});

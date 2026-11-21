@@ -27,7 +27,7 @@
   "leads": [
     {
       "name": "Dr. Marcus Vinicius Cristino Albuquerque",
-      "address_as": "doutor",
+      "address_as": "Dr. Marcus",
       "specialty": "Neurologia",
       "city": "Salvador",
       "neighborhood": "Patamares",
@@ -121,7 +121,7 @@
     },
     {
       "name": "Dra. Ludmilla Dantas Pinheiro",
-      "address_as": "doutora",
+      "address_as": "Dra. Ludmilla",
       "specialty": "Endocrinologia",
       "city": "Salvador",
       "neighborhood": "Caminho das Árvores",
@@ -226,7 +226,7 @@
     },
     {
       "name": "Dra. Mariana Fontes",
-      "address_as": "doutora",
+      "address_as": "Dra. Mariana",
       "specialty": "Psiquiatria (infância, adolescência e adulto)",
       "city": "Salvador",
       "neighborhood": "Caminho das Árvores",
@@ -319,7 +319,7 @@
     },
     {
       "name": "Dr. Pedro Paulo Bastos Filho",
-      "address_as": "doutor",
+      "address_as": "Dr. Pedro",
       "specialty": "Ginecologia e Obstetrícia · Reprodução humana e medicina fetal",
       "city": "Salvador",
       "neighborhood": "Federação",
@@ -405,7 +405,7 @@
     },
     {
       "name": "Dr. Rodrigo Pinto Cardoso",
-      "address_as": "doutor",
+      "address_as": "Dr. Rodrigo",
       "specialty": "Cardiologia",
       "city": "Salvador",
       "neighborhood": "Rio Vermelho",
