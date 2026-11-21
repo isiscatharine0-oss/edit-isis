@@ -1,0 +1,83 @@
+{
+  "origin": "usuaria",
+  "run": {
+    "label": "Piloto — abordagens aprovadas pela Isis",
+    "region": "Salvador - BA",
+    "sources": [
+      "Decisão da Isis no chat (21/11/2026)"
+    ],
+    "limitations": [
+      "Mensagens aprovadas, ainda NÃO enviadas."
+    ]
+  },
+  "leads": [
+    {
+      "name": "Dr. Marcus Vinicius Cristino Albuquerque",
+      "city": "Salvador",
+      "outreach": [
+        {
+          "channel": "ideia",
+          "idea": {
+            "observacao": "descomplica a tontura, mostrando que nem toda tontura é labirintite",
+            "nome": "Tontura de quê?",
+            "descricao": "partir de uma situação real do dia a dia, como tontura ao levantar da cama, ao virar a cabeça ou em lugares cheios, e explicar o que pode estar por trás e quando vale procurar um especialista",
+            "porque": "entender que tontura tem causa e tem caminho"
+          },
+          "approve": true,
+          "notes": "Aprovada pela Isis em 21/11/2026 (\"Estão ótimas as abordagens\")."
+        }
+      ]
+    },
+    {
+      "name": "Dra. Ludmilla Dantas Pinheiro",
+      "city": "Salvador",
+      "outreach": [
+        {
+          "channel": "ideia",
+          "idea": {
+            "observacao": "fala sobre tirzepatida com responsabilidade, incluindo o desmame",
+            "nome": "Depois da caneta",
+            "descricao": "responder uma dúvida de quem está reduzindo ou parando a medicação, como manter o resultado, o que muda na fome e o que observar no corpo",
+            "porque": "enxergar o tratamento como um processo, e não só como a caneta"
+          },
+          "approve": true,
+          "notes": "Aprovada pela Isis em 21/11/2026 (\"Estão ótimas as abordagens\")."
+        }
+      ]
+    },
+    {
+      "name": "Dr. Pedro Paulo Bastos Filho",
+      "city": "Salvador",
+      "outreach": [
+        {
+          "channel": "ideia",
+          "idea": {
+            "observacao": "mostra que o cuidado com a gravidez começa antes do positivo",
+            "nome": "Antes do positivo",
+            "descricao": "responder uma pergunta de quem está pensando em engravidar, como exames, vitaminas, idade e hábitos, com a experiência de quem já acompanhou mais de 12 mil nascimentos",
+            "porque": "se preparar com mais segurança e menos ansiedade"
+          },
+          "approve": true,
+          "notes": "Aprovada pela Isis em 21/11/2026 (\"Estão ótimas as abordagens\")."
+        }
+      ]
+    },
+    {
+      "name": "Dr. Rodrigo Pinto Cardoso",
+      "city": "Salvador",
+      "outreach": [
+        {
+          "channel": "ideia",
+          "idea": {
+            "observacao": "valoriza uma consulta sem pressa, com tempo para ouvir o paciente",
+            "nome": "O que ninguém pergunta ao cardiologista",
+            "descricao": "responder uma dúvida que muita gente sai do consultório sem fazer, como palpitação, pressão que oscila ou quando o cansaço merece atenção",
+            "porque": "chegar à consulta mais informado e menos assustado"
+          },
+          "approve": true,
+          "notes": "Aprovada pela Isis em 21/11/2026 (\"Estão ótimas as abordagens\")."
+        }
+      ]
+    }
+  ]
+}

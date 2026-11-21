@@ -460,7 +460,7 @@ function createStore(db) {
     const counts = { found: candidates.length, created: 0, duplicate: 0, skipped: 0 };
     const details = [];
     for (const c of candidates) {
-      const { evidence = [], relevant_change, user_decision, ...data } = c;
+      const { evidence = [], relevant_change, user_decision, outreach = [], ...data } = c;
       if (isDemo) data.is_demo = true;
       const dup = dedup.findDuplicate(db, data);
       if (dup) {
@@ -484,12 +484,14 @@ function createStore(db) {
         for (const f of ['instagram', 'website', 'registry', 'address_as', 'neighborhood', 'specialty']) if (!ex[f] && data[f]) fill[f] = data[f];
         if (Object.keys(fill).length) updateLead(ex.id, fill);
         applyUserDecision(ex.id, user_decision);
+        applyOutreach(ex.id, outreach);
         details.push({ name: data.name, result: 'duplicado', reason: dup.reason, lead_id: ex.id, updated: Object.keys(fill) });
         continue;
       }
       const { lead } = createLead(data, { origin, runId });
       for (const e of evidence) addEvidence(lead.id, { ...e, origin: e.origin || origin });
       applyUserDecision(lead.id, user_decision);
+      applyOutreach(lead.id, outreach);
       counts.created++; details.push({ name: data.name, result: 'criado', lead_id: lead.id });
     }
     return { counts, details };
@@ -501,6 +503,16 @@ function createStore(db) {
     const cur = getLeadRow(leadId);
     if (LEAD_DECISIONS[ud.decision] === cur.status) return;
     decideLead(leadId, ud.decision, ud.notes || null);
+  }
+
+  /** Abordagens definidas fora do painel (ex.: no chat): gera o rascunho e registra a aprovação informada. Idempotente. */
+  function applyOutreach(leadId, list) {
+    for (const o of list || []) {
+      const m = generateMessage(leadId, { purpose: 'inicial', channel: o.channel, idea: o.idea, evidence_id: o.evidence_id });
+      const same = q("SELECT id FROM outreach_message WHERE lead_id = ? AND text = ? AND id <> ? AND approval_status IN ('aprovada','rascunho')").get(leadId, m.text, m.id);
+      if (same) { q("UPDATE outreach_message SET approval_status = 'substituida' WHERE id = ?").run(m.id); continue; }
+      if (o.approve) decideMessage(m.id, 'aprovar', o.notes || null);
+    }
   }
 
   function importRun(payload) {
