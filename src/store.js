@@ -260,14 +260,15 @@ function createStore(db) {
     if (lead.do_not_contact && !(purpose === 'resposta' && opts.reply_kind === 'pedido_nao_contato')) throw new RuleError('Contato bloqueado: o profissional pediu para não ser contatado.');
     if (!OUTREACH_OK.includes(lead.status) && lead.status !== 'nao_contatar') throw new RuleError('Aprove o profissional antes de gerar uma abordagem (primeira aprovação).');
 
-    let text; let templateId = null; let evidence = null; let referenceText = null; let generator = 'modelo-local';
+    let text; let templateId = null; let evidence = null; let referenceText = null; let generator = 'modelo-local'; let channel = 'direct';
     if (purpose === 'inicial') {
       if (sentInitial) throw new RuleError('A mensagem inicial já foi enviada. Use retomada ou resposta.');
       const evs = q("SELECT * FROM evidence WHERE lead_id = ? AND hook_type IS NOT NULL AND reliability <> 'hipotese' ORDER BY id DESC").all(leadId);
       evidence = opts.evidence_id ? evs.find((e) => e.id === Number(opts.evidence_id)) : evs[0];
       if (!evidence) throw new RuleError('Não há fato real verificável marcado como referência de abordagem. Registre uma evidência com "usar na abordagem".');
       const version = all.filter((m) => m.purpose === 'inicial').length + 1;
-      const g = messages.generate({ lead, evidence, purpose, version, usage: templateUsage(), avoidPhrases: settings.avoid_phrases });
+      channel = opts.channel === 'story' ? 'story' : 'direct';
+      const g = messages.generate({ lead, evidence, purpose, version, channel, usage: templateUsage(), avoidPhrases: settings.avoid_phrases });
       text = g.text; templateId = g.template_id; referenceText = `${HOOK_TYPES[evidence.hook_type]}: ${evidence.description}`;
     } else if (purpose === 'retomada') {
       if (!sentInitial) throw new RuleError('Só é possível retomar depois de a mensagem inicial ser enviada.');
@@ -292,7 +293,12 @@ function createStore(db) {
       q("UPDATE outreach_message SET approval_status = 'substituida', updated_at = ? WHERE lead_id = ? AND purpose = ? AND approval_status = 'rascunho' AND send_status = 'nao_enviada'")
         .run(nowIso(), leadId, purpose);
       const version = q('SELECT COUNT(*) n FROM outreach_message WHERE lead_id = ? AND purpose = ?').get(leadId, purpose).n + 1;
-      const v = messages.validate(text, { purpose, avoidPhrases: settings.avoid_phrases });
+      const v = messages.validate(text, { purpose, channel, avoidPhrases: settings.avoid_phrases });
+      if (channel === 'story') {
+        const ref = evidence.fact_date || evidence.consulted_at;
+        const hours = (Date.now() - new Date(ref.length === 10 ? ref + 'T23:59:59' : ref)) / 3600000;
+        if (hours > 24) v.warnings.push({ code: 'story_expirado', message: 'Stories ficam no ar 24h e este fato foi registrado há mais de um dia. Confirme que o story ainda está disponível antes de responder.' });
+      }
       if (purpose === 'resposta') {
         const asked = all.filter((m) => m.purpose === 'resposta' && m.send_status === 'enviada').reduce((n, m) => n + messages.countQuestions(m.text), 0);
         if (asked + messages.countQuestions(text) > settings.max_qualification_questions) {
@@ -300,8 +306,8 @@ function createStore(db) {
         }
       }
       const info = q(`INSERT INTO outreach_message (lead_id, purpose, reply_kind, text, original_text, reference_evidence_id, reference_text, template_id,
-        generator, version, approval_status, send_status, warnings, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'rascunho', 'nao_enviada', ?, ?, ?)`)
-        .run(leadId, purpose, opts.reply_kind || null, text, text, evidence ? evidence.id : null, referenceText, templateId, generator, version,
+        generator, channel, version, approval_status, send_status, warnings, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'rascunho', 'nao_enviada', ?, ?, ?)`)
+        .run(leadId, purpose, opts.reply_kind || null, text, text, evidence ? evidence.id : null, referenceText, templateId, generator, channel, version,
           J([...v.errors, ...v.warnings]), nowIso(), nowIso());
       audit('mensagem_gerada', 'outreach_message', Number(info.lastInsertRowid), { lead: leadId, purpose });
       return getMessage(Number(info.lastInsertRowid));
@@ -322,7 +328,7 @@ function createStore(db) {
     if (!t) throw new RuleError('Texto vazio.');
     if (t === m.text) return m;
     const settings = getSettings();
-    const v = messages.validate(t, { purpose: m.purpose, avoidPhrases: settings.avoid_phrases });
+    const v = messages.validate(t, { purpose: m.purpose, channel: m.channel, avoidPhrases: settings.avoid_phrases });
     return tx(db, () => {
       q('INSERT INTO message_edit (message_id, before_text, after_text, created_at) VALUES (?, ?, ?, ?)').run(id, m.text, t, nowIso());
       q("UPDATE outreach_message SET text = ?, approval_status = 'rascunho', warnings = ?, updated_at = ? WHERE id = ?").run(t, J([...v.errors, ...v.warnings]), nowIso(), id);
@@ -342,7 +348,7 @@ function createStore(db) {
     if (!['aprovar', 'rejeitar', 'nova_versao'].includes(decision)) throw new RuleError('Decisão inválida (aprovar, rejeitar, nova_versao).');
     if (decision === 'aprovar') {
       if (!OUTREACH_OK.includes(lead.status) && !(m.reply_kind === 'pedido_nao_contato')) throw new RuleError('O profissional não está aprovado.');
-      const v = messages.validate(m.text, { purpose: m.purpose, avoidPhrases: getSettings().avoid_phrases });
+      const v = messages.validate(m.text, { purpose: m.purpose, channel: m.channel, avoidPhrases: getSettings().avoid_phrases });
       if (v.errors.length) throw new RuleError(`Corrija antes de aprovar: ${v.errors.map((e) => e.message).join(' ')}`);
       const sug = playbook.suggest(m.reply_kind, {});
       if (sug.requires_edit && m.text === m.original_text) throw new RuleError('Esta resposta tem trechos para completar com informações reais antes da aprovação.');
@@ -354,7 +360,7 @@ function createStore(db) {
       q('UPDATE outreach_message SET approval_status = ?, updated_at = ? WHERE id = ?').run(status, nowIso(), id);
       audit('mensagem_decidida', 'outreach_message', id, { decision, notes });
       if (decision === 'nova_versao') {
-        return generateMessage(m.lead_id, { purpose: m.purpose, evidence_id: m.reference_evidence_id, reply_kind: m.reply_kind });
+        return generateMessage(m.lead_id, { purpose: m.purpose, evidence_id: m.reference_evidence_id, reply_kind: m.reply_kind, channel: m.channel });
       }
       return getMessage(id);
     });

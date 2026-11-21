@@ -5,7 +5,7 @@
 const SALUTATIONS = [
   (t) => `Oi, ${t}! Tudo bem?`,
   (t) => `Ei, ${t}! Tudo bem?`,
-  (t) => `Olá, ${t}, tudo bem?`,
+  (t) => `Oi, ${t}, tudo bom?`,
 ];
 
 // {h} = texto do fato, que completa "você ..." (ex.: "inaugurou o novo consultório no Itaigara").
@@ -32,8 +32,37 @@ const OPENERS = {
     { id: 'exp-2', t: (h) => `Acompanhei que você ${h}. Imagino que seja um passo importante na sua trajetória.` },
   ],
   outro: [
-    { id: 'out-1', t: (h) => `Vi que você ${h} e quis passar aqui pra comentar.` },
-    { id: 'out-2', t: (h) => `Acompanhei que você ${h}. Achei muito bacana.` },
+    { id: 'out-1', t: (h) => `Vi que você ${h}, achei muito bacana!` },
+    { id: 'out-2', t: (h) => `Vi que você ${h}. Que legal ver isso!` },
+  ],
+};
+
+// Resposta a story: curta, reativa, sem saudação formal — conversa, não apresentação.
+// {h} completa "você ..." e deve descrever o que aparece no story (ex.: "mostrou a sala nova do consultório").
+const STORY = {
+  inauguracao: [
+    { id: 'st-inaug-1', t: (h) => `Que lindo que você ${h}! Imagino a alegria 😍` },
+    { id: 'st-inaug-2', t: (h) => `Que demais que você ${h}! Como está sendo essa fase?` },
+  ],
+  congresso: [
+    { id: 'st-cong-1', t: (h) => `Que legal que você ${h}! Teve algo que te surpreendeu por lá?` },
+    { id: 'st-cong-2', t: (h) => `Amei ver que você ${h} 👏 Como está sendo?` },
+  ],
+  publicacao_educativa: [
+    { id: 'st-pub-1', t: (h) => `Adorei que você ${h}! Explicação super clara 👏` },
+    { id: 'st-pub-2', t: (h) => `Que bom que você ${h}, muita gente precisa ouvir isso!` },
+  ],
+  conquista: [
+    { id: 'st-conq-1', t: (h) => `Que demais que você ${h}! Parabéns 👏` },
+    { id: 'st-conq-2', t: (h) => `Que orgulho ver que você ${h}! Merecido demais` },
+  ],
+  expansao: [
+    { id: 'st-exp-1', t: (h) => `Que fase boa! Amei ver que você ${h} 👏` },
+    { id: 'st-exp-2', t: (h) => `Que demais que você ${h}! Como está sendo essa nova etapa?` },
+  ],
+  outro: [
+    { id: 'st-out-1', t: (h) => `Que legal que você ${h}!` },
+    { id: 'st-out-2', t: (h) => `Amei ver que você ${h} 👏` },
   ],
 };
 
@@ -78,6 +107,11 @@ function generate(p) {
   const ev = p.evidence;
   if (!ev || !ev.hook_text) throw new Error('A abordagem precisa partir de um fato real registrado como evidência (com texto de referência).');
   const hook = cleanHook(ev.hook_text);
+  if (p.channel === 'story') {
+    const sl = STORY[ev.hook_type] || STORY.outro;
+    const sv = pickVariant(sl, usage, version, avoidTest((x) => x.t(hook)));
+    return { text: sv.t(hook), template_id: sv.id };
+  }
   const list = OPENERS[ev.hook_type] || OPENERS.outro;
   const v = pickVariant(list, usage, version, avoidTest((x) => x.t(hook)));
   return { text: `${salut} ${v.t(hook)}`, template_id: v.id };
@@ -100,7 +134,8 @@ const SOFT_RULES = [
     message: 'Formalidade excessiva / soa como disparo automático.' },
 ];
 
-function validate(text, { purpose = 'inicial', avoidPhrases = [] } = {}) {
+function validate(text, opts = {}) {
+  const { purpose = 'inicial', avoidPhrases = [] } = opts;
   const errors = [];
   const warnings = [];
   for (const r of HARD_RULES) if (r.re.test(text)) errors.push({ code: r.code, message: r.message });
@@ -108,7 +143,7 @@ function validate(text, { purpose = 'inicial', avoidPhrases = [] } = {}) {
     if (r.purposes && !r.purposes.includes(purpose)) continue;
     if (r.re.test(text)) warnings.push({ code: r.code, message: r.message });
   }
-  const limit = purpose === 'resposta' ? 600 : 350;
+  const limit = purpose === 'resposta' ? 600 : opts.channel === 'story' ? 160 : 350;
   if (text.length > limit) warnings.push({ code: 'longa', message: `Mensagem longa (${text.length} caracteres; ideal até ${limit}).` });
   if ((text.match(/!/g) || []).length > 3) warnings.push({ code: 'exclamacoes', message: 'Muitas exclamações.' });
   for (const ph of avoidPhrases) {
@@ -128,4 +163,4 @@ function removedSentences(before, after) {
   return split(before).filter((s) => !afterNorm.includes(s.toLowerCase()));
 }
 
-module.exports = { generate, validate, countQuestions, removedSentences, addressOf, OPENERS };
+module.exports = { generate, validate, countQuestions, removedSentences, addressOf, OPENERS, STORY };

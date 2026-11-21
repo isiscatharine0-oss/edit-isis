@@ -237,3 +237,21 @@ test('reimportação completa campos vazios e aplica decisão informada pela usu
   assert.equal(d.lead.status, 'aprovado');
   assert.equal(d.approvals[0].notes, 'Aprovado pela Isis');
 });
+
+test('resposta a story: curta, sem saudação formal, com alerta de story antigo', () => {
+  const { store } = fresh();
+  const { lead } = store.createLead({ name: 'Dra. Story', city: 'Salvador', address_as: 'doutora' });
+  store.addEvidence(lead.id, ev());
+  store.addEvidence(lead.id, hookEv({ source_name: 'Instagram (story)', hook_type: 'inauguracao', hook_text: 'mostrou a sala nova do consultório', fact_date: new Date().toISOString().slice(0, 10) }));
+  store.decideLead(lead.id, 'aprovar');
+  const m = store.generateMessage(lead.id, { channel: 'story' });
+  assert.equal(m.channel, 'story');
+  assert.doesNotMatch(m.text, /Tudo bem/);
+  assert.match(m.text, /mostrou a sala nova do consultório/);
+  assert.ok(m.text.length <= 160);
+  assert.ok(!m.warnings.some((w) => w.code === 'story_expirado'));
+  const { lead: l2 } = store.createLead({ name: 'Dr. Story Antigo', city: 'Salvador' });
+  store.addEvidence(l2.id, hookEv({ fact_date: '2026-01-01' }));
+  store.decideLead(l2.id, 'aprovar');
+  assert.ok(store.generateMessage(l2.id, { channel: 'story' }).warnings.some((w) => w.code === 'story_expirado'));
+});

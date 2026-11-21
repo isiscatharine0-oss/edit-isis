@@ -94,6 +94,7 @@ CREATE TABLE IF NOT EXISTS outreach_message (
   reference_text TEXT,
   template_id TEXT,
   generator TEXT NOT NULL,
+  channel TEXT NOT NULL DEFAULT 'direct', -- direct | story (resposta a story)
   version INTEGER NOT NULL,
   approval_status TEXT NOT NULL,   -- rascunho | aprovada | rejeitada | substituida
   send_status TEXT NOT NULL,       -- nao_enviada | enviada
@@ -210,8 +211,15 @@ function open(dbPath) {
   const db = new DatabaseSync(file);
   db.exec('PRAGMA foreign_keys = ON; PRAGMA journal_mode = WAL;');
   db.exec(SCHEMA);
+  migrate(db);
   seed(db);
   return db;
+}
+
+// Migrações simples para bancos criados por versões anteriores.
+function migrate(db) {
+  const cols = db.prepare('PRAGMA table_info(outreach_message)').all().map((c) => c.name);
+  if (!cols.includes('channel')) db.exec("ALTER TABLE outreach_message ADD COLUMN channel TEXT NOT NULL DEFAULT 'direct'");
 }
 
 function seed(db) {
