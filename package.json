@@ -12,6 +12,7 @@
     "test": "node --disable-warning=ExperimentalWarning --test test/*.test.js",
     "import": "node --disable-warning=ExperimentalWarning src/cli-import.js",
     "seed:referencias": "node --disable-warning=ExperimentalWarning src/cli-import.js data/seeds/referencias.json",
-    "seed:demo": "node --disable-warning=ExperimentalWarning src/cli-import.js data/seeds/demo-ficticio.json"
+    "seed:demo": "node --disable-warning=ExperimentalWarning src/cli-import.js data/seeds/demo-ficticio.json",
+    "seed:piloto": "node --disable-warning=ExperimentalWarning src/cli-import.js data/piloto/piloto-salvador-2026-11-21.json"
   }
 }

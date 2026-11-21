@@ -1,0 +1,490 @@
+{
+  "origin": "pesquisa_agente",
+  "run": {
+    "label": "Piloto Salvador — 5 profissionais",
+    "region": "Salvador - BA",
+    "period_start": "2026-11-21",
+    "period_end": "2026-11-21",
+    "specialties": [
+      "Neurologia",
+      "Endocrinologia",
+      "Psiquiatria",
+      "Ginecologia/Reprodução humana",
+      "Cardiologia"
+    ],
+    "sources": [
+      "Doctoralia — listagens públicas por especialidade em Salvador (robots.txt permite)",
+      "Doctoralia — perfis públicos dos profissionais"
+    ],
+    "limitations": [
+      "Instagram não analisado: não há acesso autorizado a partir deste ambiente. O critério 'Oportunidade de marketing' está vazio e depende da observação da Isis.",
+      "Links de redes sociais do Doctoralia passam por redirecionamento bloqueado pelo robots.txt; os @ não foram coletados.",
+      "Sites próprios dos profissionais não foram consultados (fora dos hosts liberados).",
+      "Seleção a partir dos perfis em destaque comercial nas listagens; isso enviesa para quem já investe em captação.",
+      "Telefones não foram registrados (minimização de dados)."
+    ]
+  },
+  "leads": [
+    {
+      "name": "Dr. Marcus Vinicius Cristino Albuquerque",
+      "address_as": "doutor",
+      "specialty": "Neurologia",
+      "city": "Salvador",
+      "neighborhood": "Patamares",
+      "notes": "Instagram, YouTube e Facebook são linkados no perfil do Doctoralia, mas o @ não foi coletado (link por redirecionamento bloqueado pelo robots.txt). Isis: verificar o Instagram e registrar observações.",
+      "evidence": [
+        {
+          "criterion": "estrutura",
+          "signal": "consultorio_proprio",
+          "description": "Único endereço presencial listado: \"Clínica Albuquerque\", Av. Luiz Viana Filho, 6462, Patamares. A clínica tem o sobrenome do médico; a propriedade não é declarada.",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/marcus-vinicius-cristino-albuquerque",
+          "reliability": "indireto",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        },
+        {
+          "criterion": "estrutura",
+          "signal": "atendimento_particular",
+          "description": "Primeira consulta de neurologia a partir de R$ 900; aviso do perfil: \"Convênios apenas pelo método de reembolso\".",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/marcus-vinicius-cristino-albuquerque",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente",
+          "fact_date": "2024-04-03"
+        },
+        {
+          "criterion": "autoridade",
+          "signal": "trajetoria_verificavel",
+          "description": "Formação listada: residências em Clínica Médica e Neurologia, aperfeiçoamento em Neurologia Geral e Ataxias, Título de Especialista em Neurologia pela Academia Brasileira de Neurologia.",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/marcus-vinicius-cristino-albuquerque",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        },
+        {
+          "criterion": "autoridade",
+          "signal": "producao_conhecimento",
+          "description": "Publicações listadas, ex.: \"Should spinocerebellar ataxias be included in the differential diagnosis for Huntington's diseases-like syndromes?\", Journal of the Neurological Sciences, v. 347, 2014.",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/marcus-vinicius-cristino-albuquerque",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        },
+        {
+          "criterion": "autoridade",
+          "signal": "reconhecimento",
+          "description": "Prêmio listado: \"Prêmio RIMA 2019 Medalha de Ouro pela Excelência na Atualização Científica Internacional\".",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/marcus-vinicius-cristino-albuquerque",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente",
+          "fact_date": "2019-01-01"
+        },
+        {
+          "criterion": "autoridade",
+          "signal": "especializacao_diferencial",
+          "description": "Declara como diferencial o atendimento de doenças hereditárias do sistema nervoso (neurogenética, ataxias) e tonturas.",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/marcus-vinicius-cristino-albuquerque",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente",
+          "hook_type": "outro",
+          "hook_text": "se dedica ao cuidado de pacientes com doenças hereditárias do sistema nervoso e com tonturas"
+        },
+        {
+          "criterion": "geral",
+          "signal": null,
+          "description": "Perfil com 552 opiniões e 364 dúvidas respondidas na plataforma; galeria com 54 fotos/vídeos; redes Instagram, YouTube e Facebook linkadas. Atenção: pode indicar comunicação já estruturada — verificar.",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/marcus-vinicius-cristino-albuquerque",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        },
+        {
+          "criterion": "geral",
+          "signal": null,
+          "description": "Na busca de neurologista em Salvador do Doctoralia, o perfil aparece marcado como resultado \"first-class\" (destaque comercial). Indício indireto de investimento em captação de pacientes; não comprova orçamento.",
+          "source_name": "Doctoralia (listagem pública)",
+          "url": "https://www.doctoralia.com.br/neurologista/salvador",
+          "reliability": "indireto",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        }
+      ]
+    },
+    {
+      "name": "Dra. Ludmilla Dantas Pinheiro",
+      "address_as": "doutora",
+      "specialty": "Endocrinologia",
+      "city": "Salvador",
+      "neighborhood": "Caminho das Árvores",
+      "website": "http://www.lusaude.com.br",
+      "registry": "RQE 20240",
+      "notes": "Site informado no perfil do Doctoralia (conteúdo não consultado). Instagram linkado no perfil, @ não coletado.",
+      "evidence": [
+        {
+          "criterion": "estrutura",
+          "signal": "consultorio_proprio",
+          "description": "Endereço com o nome \"Dra Ludmilla Dantas\": Av. Tancredo Neves, CEO Salvador Shopping, Torre Nova Iorque, sala 1810, Caminho das Árvores. Propriedade não declarada.",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/ludmilla-dantas-pinheiro",
+          "reliability": "indireto",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        },
+        {
+          "criterion": "estrutura",
+          "signal": "atendimento_particular",
+          "description": "Perfil lista modalidades de pagamento para \"visitas privadas\"; primeira consulta a partir de R$ 460.",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/ludmilla-dantas-pinheiro",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        },
+        {
+          "criterion": "autoridade",
+          "signal": "trajetoria_verificavel",
+          "description": "Formada pela Escola Bahiana; residências em Clínica Médica (Hospital Geral Roberto Santos) e Endocrinologia e Metabologia (HUPES/UFBA); RQE 20240.",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/ludmilla-dantas-pinheiro",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        },
+        {
+          "criterion": "autoridade",
+          "signal": "especializacao_diferencial",
+          "description": "Capacitação em Ultrassonografia da Tireoide e Região Cervical (Escola Caliper) e no Método Sophie; oferece ultrassonografia de tireoide e bioimpedância como serviços.",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/ludmilla-dantas-pinheiro",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        },
+        {
+          "criterion": "autoridade",
+          "signal": "reconhecimento",
+          "description": "Experiências listadas incluem \"Professora Medicina Afya\" e \"Clínica AMO - endocrinologista\".",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/ludmilla-dantas-pinheiro",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        },
+        {
+          "criterion": "momento",
+          "signal": "novos_servicos",
+          "description": "Publicação no perfil (16/11/2025): \"O ultrassom está presente nas minhas consultas como extensão do olhar clínico\". Não informa se o serviço é recente.",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/ludmilla-dantas-pinheiro",
+          "reliability": "hipotese",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        },
+        {
+          "criterion": "geral",
+          "signal": null,
+          "description": "Publicação no perfil em 16/11/2025 (\"Cuidado preciso para sua tireoide\") e em 31/10/2025 (\"Equilíbrio hormonal é sinônimo de bem-estar\").",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/ludmilla-dantas-pinheiro",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente",
+          "fact_date": "2025-11-16",
+          "hook_type": "publicacao_educativa",
+          "hook_text": "trouxe o ultrassom da tireoide para dentro da consulta, como extensão do olhar clínico"
+        },
+        {
+          "criterion": "geral",
+          "signal": null,
+          "description": "253 opiniões de pacientes na plataforma.",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/ludmilla-dantas-pinheiro",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        },
+        {
+          "criterion": "geral",
+          "signal": null,
+          "description": "Na busca de endocrinologista em Salvador do Doctoralia, o perfil aparece marcado como resultado \"first-class\" (destaque comercial). Indício indireto de investimento em captação de pacientes; não comprova orçamento.",
+          "source_name": "Doctoralia (listagem pública)",
+          "url": "https://www.doctoralia.com.br/endocrinologista/salvador",
+          "reliability": "indireto",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        }
+      ]
+    },
+    {
+      "name": "Dra. Mariana Fontes",
+      "address_as": "doutora",
+      "specialty": "Psiquiatria (infância, adolescência e adulto)",
+      "city": "Salvador",
+      "neighborhood": "Caminho das Árvores",
+      "website": "http://www.marianafontes.com",
+      "notes": "Site informado no perfil do Doctoralia (conteúdo não consultado). Instagram linkado, @ não coletado. Consultório próprio não confirmado.",
+      "evidence": [
+        {
+          "criterion": "geral",
+          "signal": null,
+          "description": "Atende presencialmente no Edifício CEO, sala 1012, Torre Londres, Av. Tancredo Neves, 2539, Caminho das Árvores; também teleconsulta. Experiência listada: \"Trabalha em Clínica Holiste\". Não está claro se o consultório é próprio.",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/mariana-fontes",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        },
+        {
+          "criterion": "estrutura",
+          "signal": "atendimento_particular",
+          "description": "Perfil lista modalidades de pagamento para \"visitas privadas\"; primeira consulta R$ 600.",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/mariana-fontes",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        },
+        {
+          "criterion": "autoridade",
+          "signal": "trajetoria_verificavel",
+          "description": "Formada pela Escola Bahiana; residência em psiquiatria no HUPES/UFBA; mestranda em Neurociências pela UFBA.",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/mariana-fontes",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        },
+        {
+          "criterion": "autoridade",
+          "signal": "reconhecimento",
+          "description": "Preceptora de Psiquiatria da Escola Bahiana de Medicina e Saúde Pública (destaque \"Professora da Bahiana\").",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/mariana-fontes",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        },
+        {
+          "criterion": "autoridade",
+          "signal": "producao_conhecimento",
+          "description": "Coautora do capítulo \"Emergências Psiquiátricas\" em Emergências Clínicas, 4ª ed., Artmed, 2020.",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/mariana-fontes",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        },
+        {
+          "criterion": "autoridade",
+          "signal": "especializacao_diferencial",
+          "description": "Especialista em infância e adolescência; cofundadora do EspectrusMed, \"espaço virtual\" que alia medicina e recursos artísticos.",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/mariana-fontes",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente",
+          "hook_type": "outro",
+          "hook_text": "é cofundadora do EspectrusMed, que une medicina e recursos artísticos"
+        },
+        {
+          "criterion": "geral",
+          "signal": null,
+          "description": "90 opiniões e 85 dúvidas respondidas na plataforma.",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/mariana-fontes",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        },
+        {
+          "criterion": "geral",
+          "signal": null,
+          "description": "Na busca de psiquiatra em Salvador do Doctoralia, o perfil aparece marcado como resultado \"first-class\" (destaque comercial). Indício indireto de investimento em captação de pacientes; não comprova orçamento.",
+          "source_name": "Doctoralia (listagem pública)",
+          "url": "https://www.doctoralia.com.br/psiquiatra/salvador",
+          "reliability": "indireto",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        }
+      ]
+    },
+    {
+      "name": "Dr. Pedro Paulo Bastos Filho",
+      "address_as": "doutor",
+      "specialty": "Ginecologia e Obstetrícia · Reprodução humana e medicina fetal",
+      "city": "Salvador",
+      "neighborhood": "Federação",
+      "website": "http://reproducaohumanasalvador.com",
+      "registry": "CRM-BA 7781",
+      "notes": "Site informado no perfil do Doctoralia (conteúdo não consultado). Trajetória longa (residência 1985-86).",
+      "evidence": [
+        {
+          "criterion": "estrutura",
+          "signal": "consultorio_proprio",
+          "description": "Endereço identificado como \"Consultório particular\": Av. Anita Garibaldi, 1555, sala 805, Federação.",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/pedro-paulo-bastos-filho",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        },
+        {
+          "criterion": "estrutura",
+          "signal": "atendimento_particular",
+          "description": "Nesse endereço atende pacientes particulares (sem convênio) e Cassi.",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/pedro-paulo-bastos-filho",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        },
+        {
+          "criterion": "estrutura",
+          "signal": "equipe",
+          "description": "Opinião de paciente (29/08/2024): \"Possui também uma equipe atenciosa e acolhedora!\"",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/pedro-paulo-bastos-filho",
+          "reliability": "indireto",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente",
+          "fact_date": "2024-08-29"
+        },
+        {
+          "criterion": "autoridade",
+          "signal": "trajetoria_verificavel",
+          "description": "CRM 7781-BA; residência na UFBA (1985-1986); especialização em gravidez de alto risco e endocrinologia ginecológica pela USP (1987).",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/pedro-paulo-bastos-filho",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        },
+        {
+          "criterion": "autoridade",
+          "signal": "especializacao_diferencial",
+          "description": "Especialista em reprodução humana e medicina fetal; médico dos centros INSEMINA e CENAFERT, em Salvador.",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/pedro-paulo-bastos-filho",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        },
+        {
+          "criterion": "geral",
+          "signal": null,
+          "description": "295 opiniões; opinião de paciente (14/02/2025): \"Ja sou paciente de Pedro Paulo há 24 anos\".",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/pedro-paulo-bastos-filho",
+          "reliability": "indireto",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente",
+          "fact_date": "2025-02-14",
+          "hook_type": "conquista",
+          "hook_text": "tem pacientes que acompanham seu trabalho há mais de 20 anos"
+        },
+        {
+          "criterion": "geral",
+          "signal": null,
+          "description": "Na busca de ginecologista em Salvador do Doctoralia, o perfil aparece marcado como resultado \"first-class\" (destaque comercial). Indício indireto de investimento em captação de pacientes; não comprova orçamento.",
+          "source_name": "Doctoralia (listagem pública)",
+          "url": "https://www.doctoralia.com.br/ginecologista/salvador",
+          "reliability": "indireto",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        }
+      ]
+    },
+    {
+      "name": "Dr. Rodrigo Pinto Cardoso",
+      "address_as": "doutor",
+      "specialty": "Cardiologia",
+      "city": "Salvador",
+      "neighborhood": "Rio Vermelho",
+      "notes": "Instagram linkado no perfil do Doctoralia, @ não coletado.",
+      "evidence": [
+        {
+          "criterion": "estrutura",
+          "signal": "consultorio_proprio",
+          "description": "Endereço nomeado \"Centro Médico Aliança - Dr. Rodrigo Pinto Cardoso\", Av. Juracy Magalhães Júnior, 2096, Rio Vermelho. Posicionamento pessoal dentro de centro médico; propriedade não declarada.",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/rodrigo-pinto-cardoso",
+          "reliability": "indireto",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        },
+        {
+          "criterion": "estrutura",
+          "signal": "atendimento_particular",
+          "description": "\"Oferecemos consulta de cardiologia e clínica médica presencial particular, com duração aproximada de 1 hora\"; consulta R$ 450.",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/rodrigo-pinto-cardoso",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente",
+          "hook_type": "outro",
+          "hook_text": "oferece consultas de cardiologia com cerca de uma hora de duração, sem pressa"
+        },
+        {
+          "criterion": "geral",
+          "signal": null,
+          "description": "Publicação no perfil (24/09/2024): \"Atendimento humanizado, com recepção confortável, sem aglomerações, sala de atendimento separada da sala de exame médico.\" Sinal de investimento na experiência do paciente.",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/rodrigo-pinto-cardoso",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente",
+          "fact_date": "2024-09-24"
+        },
+        {
+          "criterion": "autoridade",
+          "signal": "trajetoria_verificavel",
+          "description": "Medicina pela FMUSP (1998), Clínica Médica no HC-FMUSP (2000), Cardiologia no INCOR-FMUSP (2002); estágios em Harvard School of Public Health e Scripps Memorial Hospital (2001).",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/rodrigo-pinto-cardoso",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        },
+        {
+          "criterion": "autoridade",
+          "signal": "reconhecimento",
+          "description": "Experiências listadas: médico assistente da Emergência do INCOR (2003-2005); plantonista da UTI Cardiovascular do Hospital Santa Izabel (2005-2023); instrutor de ACLS.",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/rodrigo-pinto-cardoso",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        },
+        {
+          "criterion": "geral",
+          "signal": null,
+          "description": "17 opiniões e 24 dúvidas respondidas na plataforma.",
+          "source_name": "Doctoralia (perfil público)",
+          "url": "https://www.doctoralia.com.br/perfil/rodrigo-pinto-cardoso",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        },
+        {
+          "criterion": "geral",
+          "signal": null,
+          "description": "Na busca de cardiologista em Salvador do Doctoralia, o perfil aparece marcado como resultado \"first-class\" (destaque comercial). Indício indireto de investimento em captação de pacientes; não comprova orçamento.",
+          "source_name": "Doctoralia (listagem pública)",
+          "url": "https://www.doctoralia.com.br/cardiologista/salvador",
+          "reliability": "indireto",
+          "consulted_at": "2026-11-21",
+          "origin": "pesquisa_agente"
+        }
+      ]
+    }
+  ]
+}

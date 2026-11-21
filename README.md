@@ -13,6 +13,7 @@ Requisitos: **Node.js 22.5+** (nada mais; não há dependências para instalar).
 npm start                    # abre em http://127.0.0.1:3000
 npm test                     # testes das regras críticas
 npm run seed:referencias     # cadastra os 3 perfis de referência do briefing
+npm run seed:piloto          # rodada piloto: 5 profissionais reais de Salvador (fonte: Doctoralia, 21/11/2026)
 npm run seed:demo            # (opcional) 3 leads FICTÍCIOS para conhecer o fluxo
 npm run import -- arquivo.json  # importa uma rodada de pesquisa
 ```
@@ -123,6 +124,13 @@ critério sustentado só por hipóteses, momento comercial com mais de 12 meses 
 - Credenciais só por variável de ambiente (`.env`, fora do Git). O servidor escuta apenas em `127.0.0.1` por padrão.
 - Ações importantes ficam no `audit_log`.
 - Dados fictícios são marcados (`is_demo`), sinalizados na interface e excluídos dos indicadores.
+
+## Piloto (21/11/2026)
+
+`data/piloto/piloto-salvador-2026-11-21.json`: 5 profissionais reais de Salvador, todos com evidências de perfis públicos do
+Doctoralia (robots.txt consultado; leitura manual de poucas páginas, com intervalo). Limitações registradas na rodada:
+Instagram não analisado (o critério de marketing depende da observação da Isis), @ e sites próprios não coletados,
+telefones não registrados, seleção enviesada para perfis com destaque comercial na plataforma.
 
 ## Próximas etapas
 
