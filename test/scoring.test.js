@@ -59,3 +59,15 @@ test('momento com mais de 12 meses é sinalizado', () => {
   const s = scoreLead([e({ criterion: 'momento', signal: 'inauguracao_ampliacao', fact_date: '2020-01-01' })], DEFAULT_CRITERIA, { today: today() });
   assert.ok(s.flags.some((f) => f.code === 'momento_desatualizado'));
 });
+
+test('prioridade exige estrutura mínima (regra aprovada: 20/35)', () => {
+  const evs = [];
+  for (const c of DEFAULT_CRITERIA.criteria) for (const sg of c.signals) if (sg.points > 0 && sg.code !== 'consultorio_proprio' && sg.code !== 'equipe') evs.push(e({ criterion: c.code, signal: sg.code, url: `https://p${n}.test/` }));
+  const s = scoreLead(evs, DEFAULT_CRITERIA, { priorityThreshold: 80, minStructure: 20 });
+  assert.equal(s.breakdown.estrutura.points, 15);
+  assert.ok(s.total >= 80);
+  assert.equal(s.priority, false);
+  assert.ok(s.flags.some((f) => f.code === 'estrutura_insuficiente'));
+  const ok = scoreLead([...evs, e({ signal: 'consultorio_proprio', url: 'https://q.test/' })], DEFAULT_CRITERIA, { priorityThreshold: 80, minStructure: 20 });
+  assert.equal(ok.priority, true);
+});

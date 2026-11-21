@@ -1,0 +1,238 @@
+{
+  "origin": "usuaria",
+  "run": {
+    "label": "Piloto — observações do Instagram e decisões da Isis",
+    "region": "Salvador - BA",
+    "period_start": "2026-11-21",
+    "period_end": "2026-11-21",
+    "sources": [
+      "Capturas de tela dos perfis do Instagram enviadas pela Isis (21/11/2026)"
+    ],
+    "limitations": [
+      "Somente a parte visível das capturas (bio, destaques e primeiros posts); legendas e datas dos posts não visíveis.",
+      "Dra. Mariana Fontes: sem captura do Instagram; aprovada sem análise de conteúdo."
+    ]
+  },
+  "leads": [
+    {
+      "name": "Dr. Rodrigo Pinto Cardoso",
+      "city": "Salvador",
+      "instagram": "@dr.rodrigopintocardoso",
+      "user_decision": {
+        "decision": "aprovar",
+        "notes": "Aprovado pela Isis em 21/11/2026 (decisão informada no chat, após ver o Instagram)."
+      },
+      "evidence": [
+        {
+          "criterion": "estrutura",
+          "signal": "atendimento_particular",
+          "description": "Bio: \"Médico Cardiologista e Clínico Geral · Consultas particulares\".",
+          "source_name": "Instagram — captura de tela enviada pela Isis",
+          "url": "https://www.instagram.com/dr.rodrigopintocardoso/",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "usuaria"
+        },
+        {
+          "criterion": "marketing",
+          "signal": "estrutura_maior_que_comunicacao",
+          "description": "Perfil com 25 posts e 204 seguidores, pequeno em relação à trajetória (USP, INCOR, 20+ anos de hospital). Link da bio aponta para o Doctoralia.",
+          "source_name": "Instagram — captura de tela enviada pela Isis",
+          "url": "https://www.instagram.com/dr.rodrigopintocardoso/",
+          "reliability": "observado",
+          "consulted_at": "2026-11-21",
+          "origin": "usuaria"
+        },
+        {
+          "criterion": "marketing",
+          "signal": "conteudo_generico",
+          "description": "Parte relevante do grid são artes de datas comemorativas (Dia Nacional de Prevenção das Arritmias e Morte Súbita, Dia do Cardiologista, Saúde dos Rins 14/03/2024).",
+          "source_name": "Instagram — captura de tela enviada pela Isis",
+          "url": "https://www.instagram.com/dr.rodrigopintocardoso/",
+          "reliability": "observado",
+          "consulted_at": "2026-11-21",
+          "origin": "usuaria"
+        },
+        {
+          "criterion": "geral",
+          "signal": null,
+          "description": "O próprio médico aparece em vários vídeos do grid (não se aplica \"aparece pouco\"). Destaques: Reflexões, Corpo e Mente, Datas importantes, dieta, Informações.",
+          "source_name": "Instagram — captura de tela enviada pela Isis",
+          "url": "https://www.instagram.com/dr.rodrigopintocardoso/",
+          "reliability": "observado",
+          "consulted_at": "2026-11-21",
+          "origin": "usuaria"
+        }
+      ]
+    },
+    {
+      "name": "Dra. Ludmilla Dantas Pinheiro",
+      "city": "Salvador",
+      "instagram": "@dra.ludmilladantas",
+      "user_decision": {
+        "decision": "aprovar",
+        "notes": "Aprovado pela Isis em 21/11/2026 (decisão informada no chat, após ver o Instagram)."
+      },
+      "evidence": [
+        {
+          "criterion": "estrutura",
+          "signal": "atendimento_particular",
+          "description": "Bio: \"Atendimento particular\"; endereço CEO Salvador Shopping, Torre Nova Iorque, sala 1810.",
+          "source_name": "Instagram — captura de tela enviada pela Isis",
+          "url": "https://www.instagram.com/dra.ludmilladantas/",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "usuaria"
+        },
+        {
+          "criterion": "autoridade",
+          "signal": "eventos_congressos",
+          "description": "Destaques com os nomes \"FLASO 2026\", \"CITED 2026\" e \"EBT 2026\" (eventos da área).",
+          "source_name": "Instagram — captura de tela enviada pela Isis",
+          "url": "https://www.instagram.com/dra.ludmilladantas/",
+          "reliability": "observado",
+          "consulted_at": "2026-11-21",
+          "origin": "usuaria",
+          "hook_type": "congresso",
+          "hook_text": "registrou nos destaques os eventos FLASO, CITED e EBT de 2026"
+        },
+        {
+          "criterion": "momento",
+          "signal": "novos_servicos",
+          "description": "Destaque \"Aplicativo\" e post fixado \"Tutorial: como usar os formulários do aplicativo\" (app próprio para pacientes, com \"Conheça Nossos Serviços\"). Não se sabe desde quando existe.",
+          "source_name": "Instagram — captura de tela enviada pela Isis",
+          "url": "https://www.instagram.com/dra.ludmilladantas/",
+          "reliability": "observado",
+          "consulted_at": "2026-11-21",
+          "origin": "usuaria"
+        },
+        {
+          "criterion": "marketing",
+          "signal": "marketing_estruturado",
+          "description": "1.141 posts, 17,9 mil seguidores, identidade visual consistente (paleta rosé/bege, logo \"Dra. Ludmilla Dantas\"), posts fixados, linktr.ee e Threads. Indica comunicação já bem desenvolvida — possivelmente com equipe ou agência.",
+          "source_name": "Instagram — captura de tela enviada pela Isis",
+          "url": "https://www.instagram.com/dra.ludmilladantas/",
+          "reliability": "observado",
+          "consulted_at": "2026-11-21",
+          "origin": "usuaria"
+        }
+      ]
+    },
+    {
+      "name": "Dr. Marcus Vinicius Cristino Albuquerque",
+      "city": "Salvador",
+      "instagram": "@drmarcusalbuquerque",
+      "user_decision": {
+        "decision": "aprovar",
+        "notes": "Aprovado pela Isis em 21/11/2026 (decisão informada no chat, após ver o Instagram)."
+      },
+      "evidence": [
+        {
+          "criterion": "estrutura",
+          "signal": "consultorio_proprio",
+          "description": "Posts com a marca \"Clínica Albuquerque\" e endereço na Av. Paralela, 6462, Torre A, sala 1606, com chamada para agendamento. Reforça clínica com o nome dele; propriedade não declarada.",
+          "source_name": "Instagram — captura de tela enviada pela Isis",
+          "url": "https://www.instagram.com/drmarcusalbuquerque/",
+          "reliability": "observado",
+          "consulted_at": "2026-11-21",
+          "origin": "usuaria"
+        },
+        {
+          "criterion": "autoridade",
+          "signal": "reconhecimento",
+          "description": "Post de divulgação \"Saúde & Bem-Estar com Dr. Rodrigo Guedes\" (29 out, 7h30), em que aparece como convidado.",
+          "source_name": "Instagram — captura de tela enviada pela Isis",
+          "url": "https://www.instagram.com/drmarcusalbuquerque/",
+          "reliability": "observado",
+          "consulted_at": "2026-11-21",
+          "origin": "usuaria",
+          "hook_type": "congresso",
+          "hook_text": "participou do Saúde & Bem-Estar com o Dr. Rodrigo Guedes"
+        },
+        {
+          "criterion": "marketing",
+          "signal": null,
+          "description": "149 posts, 3.274 seguidores. Aparece em muitos posts e nos destaques (Tonturas, Neurooftalmologia, Demências, Ataxias, Aulas e tutoriais); conteúdo educativo especializado; artes com CTA de agendamento. Comunicação ativa: oportunidade de marketing não evidente nesta captura.",
+          "source_name": "Instagram — captura de tela enviada pela Isis",
+          "url": "https://www.instagram.com/drmarcusalbuquerque/",
+          "reliability": "observado",
+          "consulted_at": "2026-11-21",
+          "origin": "usuaria"
+        },
+        {
+          "criterion": "geral",
+          "signal": null,
+          "description": "Bio: \"+2000 pacientes atendidos · Descomplicando a tontura e/ou desequilíbrio · Marque agora sua consulta\"; linktr.ee e Threads.",
+          "source_name": "Instagram — captura de tela enviada pela Isis",
+          "url": "https://www.instagram.com/drmarcusalbuquerque/",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "usuaria"
+        }
+      ]
+    },
+    {
+      "name": "Dr. Pedro Paulo Bastos Filho",
+      "city": "Salvador",
+      "instagram": "@dr.pedropaulofilho",
+      "registry": "CRM-BA 7781",
+      "user_decision": {
+        "decision": "aprovar",
+        "notes": "Aprovado pela Isis em 21/11/2026 (decisão informada no chat, após ver o Instagram)."
+      },
+      "evidence": [
+        {
+          "criterion": "estrutura",
+          "signal": "consultorio_proprio",
+          "description": "Post fixado \"Onde me encontrar?\" com a marca \"Clínica Dr. Pedro Paulo — Ginecologia Obstetrícia\" (logo dP) na Av. Anita Garibaldi, 1555, sala 805.",
+          "source_name": "Instagram — captura de tela enviada pela Isis",
+          "url": "https://www.instagram.com/dr.pedropaulofilho/",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "usuaria"
+        },
+        {
+          "criterion": "autoridade",
+          "signal": "trajetoria_verificavel",
+          "description": "Bio: \"CRM 7781 | RQE 21356\".",
+          "source_name": "Instagram — captura de tela enviada pela Isis",
+          "url": "https://www.instagram.com/dr.pedropaulofilho/",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-21",
+          "origin": "usuaria"
+        },
+        {
+          "criterion": "autoridade",
+          "signal": "reconhecimento",
+          "description": "Bio: \"+12 mil vidas recebidas em 41 anos de história\" (autodeclarado).",
+          "source_name": "Instagram — captura de tela enviada pela Isis",
+          "url": "https://www.instagram.com/dr.pedropaulofilho/",
+          "reliability": "observado",
+          "consulted_at": "2026-11-21",
+          "origin": "usuaria",
+          "hook_type": "conquista",
+          "hook_text": "celebra mais de 12 mil vidas recebidas em 41 anos de história"
+        },
+        {
+          "criterion": "marketing",
+          "signal": null,
+          "description": "152 posts, 5.096 seguidores. Identidade visual própria (logo dP), posts fixados de apresentação, destaques organizados (Família, Depoimentos, Horários, Dúvidas); aparece em fotos e vídeos. Alguns posts usam imagem de banco. Comunicação organizada: oportunidade a avaliar com mais posts.",
+          "source_name": "Instagram — captura de tela enviada pela Isis",
+          "url": "https://www.instagram.com/dr.pedropaulofilho/",
+          "reliability": "observado",
+          "consulted_at": "2026-11-21",
+          "origin": "usuaria"
+        }
+      ]
+    },
+    {
+      "name": "Dra. Mariana Fontes",
+      "city": "Salvador",
+      "user_decision": {
+        "decision": "aprovar",
+        "notes": "Aprovado pela Isis em 21/11/2026 (decisão informada no chat, após ver o Instagram)."
+      },
+      "evidence": []
+    }
+  ]
+}

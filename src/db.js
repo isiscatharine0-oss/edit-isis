@@ -194,6 +194,7 @@ const DEFAULT_SETTINGS = {
   automation_enabled: false,          // automações recorrentes só após aprovação (fase 7)
   weekly_target: 20,
   priority_threshold: 90,
+  priority_min_structure: 20,         // aprovado pela Isis em 21/11/2026: prioritário exige estrutura >= 20/35
   qualified_threshold: 70,
   followup_min_days: 4,
   max_qualification_questions: 2,

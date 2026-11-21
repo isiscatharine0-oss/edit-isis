@@ -102,7 +102,17 @@ function scoreLead(evidences, definition, opts = {}) {
       message: 'Nenhuma análise de conteúdo/Instagram registrada. Oportunidade de marketing ainda não avaliada.' });
   }
 
-  return { total, breakdown, justification, missing, flags, confidence, confidence_level };
+  // Regra de prioridade (aprovada pela Isis em 21/11/2026): nota alta só é prioritária com estrutura sólida.
+  const priorityThreshold = opts.priorityThreshold ?? 90;
+  const minStructure = opts.minStructure ?? 0;
+  const structure = breakdown.estrutura ? breakdown.estrutura.points : 0;
+  const priority = total >= priorityThreshold && structure >= minStructure;
+  if (total >= priorityThreshold && structure < minStructure) {
+    flags.push({ code: 'estrutura_insuficiente', severity: 'revisar',
+      message: `Nota ${total}, mas estrutura ${structure}/35 (mínimo ${minStructure} para prioridade). Estrutura insuficiente para o ticket.` });
+  }
+
+  return { total, breakdown, justification, missing, flags, confidence, confidence_level, priority };
 }
 
 module.exports = { scoreLead };

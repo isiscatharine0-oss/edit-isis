@@ -13,7 +13,7 @@ Requisitos: **Node.js 22.5+** (nada mais; não há dependências para instalar).
 npm start                    # abre em http://127.0.0.1:3000
 npm test                     # testes das regras críticas
 npm run seed:referencias     # cadastra os 3 perfis de referência do briefing
-npm run seed:piloto          # rodada piloto: 5 profissionais reais de Salvador (fonte: Doctoralia, 21/11/2026)
+npm run seed:piloto          # piloto: 5 profissionais reais (Doctoralia) + observações do Instagram e aprovações da Isis
 npm run seed:demo            # (opcional) 3 leads FICTÍCIOS para conhecer o fluxo
 npm run import -- arquivo.json  # importa uma rodada de pesquisa
 ```
@@ -51,6 +51,9 @@ migrar para Postgres/Supabase trocando apenas `src/db.js`.
 
 - **21/11/2026 — Operação sem custos.** Integrações pagas ficam bloqueadas (`allow_paid_integrations: false`) até nova autorização da Isis.
 - **21/11/2026 — Por que as referências atraem:** perfis consolidados, com estrutura que aparenta comportar investimento alto. O sistema traduz isso em evidências de estrutura (consultório próprio, atendimento particular, equipe, expansão), nunca em orçamento presumido.
+
+- **21/11/2026 — Regra de prioridade:** prioritário exige nota ≥ 90 **e** estrutura ≥ 20/35 (`priority_min_structure`). Nota alta com estrutura fraca recebe o alerta "estrutura insuficiente para o ticket".
+- **21/11/2026 — Piloto:** os 5 profissionais foram aprovados pela Isis após ver o Instagram (`data/piloto/instagram-e-decisoes-2026-11-21.json`).
 
 ## Integrações — o que está disponível de verdade
 

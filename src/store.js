@@ -44,6 +44,9 @@ function createStore(db) {
       if (k === 'avoid_phrases') throw new RuleError('Frases a evitar mudam por sugestão aprovada ou na tela de Aprendizado.');
       up.run(J(v), k);
     }
+    if (['priority_threshold', 'priority_min_structure'].some((k) => k in (patch || {}))) {
+      for (const l of q('SELECT id FROM lead').all()) rescore(l.id);
+    }
     audit('configuracao_alterada', 'setting', null, patch);
     return getSettings();
   }
@@ -126,7 +129,9 @@ function createStore(db) {
     rows = rows.map((l) => {
       const s = latestScore(l.id);
       const opp = s ? s.justification.filter((j) => (j.criterion === 'marketing' || j.criterion === 'momento') && j.points > 0).slice(0, 3).map((j) => j.label) : [];
-      return { ...l, score: s ? s.total : null, confidence: s ? s.confidence : null, confidence_level: s ? s.confidence_level : null,
+      const st = getSettings();
+      const priority = !!s && s.total >= st.priority_threshold && s.breakdown.estrutura.points >= st.priority_min_structure;
+      return { ...l, priority, score: s ? s.total : null, confidence: s ? s.confidence : null, confidence_level: s ? s.confidence_level : null,
         flags: s ? s.flags : [], opportunities: opp, breakdown: s ? s.breakdown : null };
     });
     if (f.reference === 'only') rows = rows.filter((l) => l.is_reference);
@@ -206,7 +211,8 @@ function createStore(db) {
   function rescore(leadId) {
     const crit = activeCriteria();
     const evs = q('SELECT * FROM evidence WHERE lead_id = ?').all(leadId);
-    const s = scoreLead(evs, crit.definition);
+    const st = getSettings();
+    const s = scoreLead(evs, crit.definition, { priorityThreshold: st.priority_threshold, minStructure: st.priority_min_structure });
     const prev = latestScore(leadId);
     if (prev && prev.criteria_version_id === crit.id && prev.total === s.total && prev.confidence === s.confidence
       && J(prev.justification) === J(s.justification) && J(prev.flags) === J(s.flags)) return prev;
@@ -441,7 +447,7 @@ function createStore(db) {
     const counts = { found: candidates.length, created: 0, duplicate: 0, skipped: 0 };
     const details = [];
     for (const c of candidates) {
-      const { evidence = [], relevant_change, ...data } = c;
+      const { evidence = [], relevant_change, user_decision, ...data } = c;
       if (isDemo) data.is_demo = true;
       const dup = dedup.findDuplicate(db, data);
       if (dup) {
@@ -460,14 +466,28 @@ function createStore(db) {
           const same = q('SELECT id FROM evidence WHERE lead_id = ? AND description = ? AND COALESCE(url, \'\') = ?').get(ex.id, e.description, e.url || '');
           if (!same) addEvidence(ex.id, { ...e, origin: e.origin || origin });
         }
-        details.push({ name: data.name, result: 'duplicado', reason: dup.reason, lead_id: ex.id });
+        // Completa campos vazios do registro existente (ex.: Instagram confirmado depois).
+        const fill = {};
+        for (const f of ['instagram', 'website', 'registry', 'address_as', 'neighborhood', 'specialty']) if (!ex[f] && data[f]) fill[f] = data[f];
+        if (Object.keys(fill).length) updateLead(ex.id, fill);
+        applyUserDecision(ex.id, user_decision);
+        details.push({ name: data.name, result: 'duplicado', reason: dup.reason, lead_id: ex.id, updated: Object.keys(fill) });
         continue;
       }
       const { lead } = createLead(data, { origin, runId });
       for (const e of evidence) addEvidence(lead.id, { ...e, origin: e.origin || origin });
+      applyUserDecision(lead.id, user_decision);
       counts.created++; details.push({ name: data.name, result: 'criado', lead_id: lead.id });
     }
     return { counts, details };
+  }
+
+  /** Decisão da usuária registrada fora do painel (ex.: informada no chat), aplicada com as mesmas regras. */
+  function applyUserDecision(leadId, ud) {
+    if (!ud || !ud.decision) return;
+    const cur = getLeadRow(leadId);
+    if (LEAD_DECISIONS[ud.decision] === cur.status) return;
+    decideLead(leadId, ud.decision, ud.notes || null);
   }
 
   function importRun(payload) {
@@ -557,7 +577,7 @@ function createStore(db) {
     const st = getSettings();
     const leads = q(`SELECT l.id, l.created_at FROM lead l WHERE ${base} AND l.created_at BETWEEN ? AND ?`).all(from, to);
     const qualified = leads.filter((l) => { const s = latestScore(l.id); return s && s.total >= st.qualified_threshold; }).length;
-    const priority = leads.filter((l) => { const s = latestScore(l.id); return s && s.total >= st.priority_threshold; }).length;
+    const priority = leads.filter((l) => { const s = latestScore(l.id); return s && s.total >= st.priority_threshold && s.breakdown.estrutura.points >= st.priority_min_structure; }).length;
     const count = (sql, ...args) => q(sql).get(...args).n;
     const responseKinds = Object.entries(playbook.INTERACTION_KINDS).filter(([, v]) => v.response).map(([k]) => `'${k}'`).join(',');
     const out = {

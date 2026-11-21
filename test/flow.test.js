@@ -226,3 +226,14 @@ test('integrações pagas ficam bloqueadas por padrão (operação sem custos)',
     assert.match(gp.detail, /sem custos/);
   } finally { delete process.env.GOOGLE_PLACES_API_KEY; }
 });
+
+test('reimportação completa campos vazios e aplica decisão informada pela usuária', () => {
+  const { store } = fresh();
+  store.importRun({ run: { region: 'Salvador - BA' }, leads: [{ name: 'Dr. Campo Vazio', city: 'Salvador', evidence: [ev()] }] });
+  const r = store.importRun({ run: { region: 'Salvador - BA' }, leads: [{ name: 'Dr. Campo Vazio', city: 'Salvador', instagram: '@dr.campo',
+    user_decision: { decision: 'aprovar', notes: 'Aprovado pela Isis' } }] });
+  const d = store.getLead(r.details[0].lead_id);
+  assert.equal(d.lead.instagram, 'dr.campo');
+  assert.equal(d.lead.status, 'aprovado');
+  assert.equal(d.approvals[0].notes, 'Aprovado pela Isis');
+});

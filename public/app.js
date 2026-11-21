@@ -112,7 +112,7 @@ async function viewHome() {
       <div class="actions"><a class="btn primary" href="#/leads">Ver leads</a><button class="btn" data-action="new-lead">+ Novo lead</button></div></div>
     <div class="kpis">
       ${kpi(m.leads_qualificados, `Leads qualificados (≥ ${META.settings.qualified_threshold})`)}
-      ${kpi(m.leads_prioritarios, `Prioritários (≥ ${META.settings.priority_threshold})`)}
+      ${kpi(m.leads_prioritarios, `Prioritários (≥ ${META.settings.priority_threshold} e estrutura ≥ ${META.settings.priority_min_structure})`)}
       ${kpi(m.perfis_aprovados, 'Perfis aprovados')}
       ${kpi(m.mensagens_aprovadas, 'Mensagens aprovadas')}
       ${kpi(m.mensagens_enviadas, 'Envios confirmados')}
@@ -155,7 +155,7 @@ async function viewLeads() {
     </form><datalist id="dl-spec">${META.settings.specialties.map((s) => `<option value="${esc(s)}">`).join('')}</datalist></div>
     <div class="card">${leads.length ? `<div class="table-wrap"><table><thead><tr><th>Pontos</th><th>Profissional</th><th class="hide-sm">Cidade</th><th class="hide-sm">Links</th><th>Confiança</th><th class="hide-sm">Principais oportunidades</th><th>Status</th><th class="hide-sm">Atualizado</th></tr></thead><tbody>
       ${leads.map((l) => `<tr class="clickable" data-href="#/lead/${l.id}">
-        <td>${scoreBadge(l.score)}${l.flags.some((x) => x.severity === 'revisar') ? ' <span class="tag bad" title="Inconsistência a revisar">!</span>' : ''}</td>
+        <td>${scoreBadge(l.score)}${l.priority ? ' <span class="tag ok">Prioritário</span>' : ''}${l.flags.some((x) => x.severity === 'revisar') ? ' <span class="tag bad" title="Inconsistência a revisar">!</span>' : ''}</td>
         <td><strong>${esc(l.name)}</strong>${l.is_demo ? ' <span class="tag warn">DEMO</span>' : ''}<br><small>${esc(l.specialty || 'Especialidade não informada')}</small></td>
         <td class="hide-sm">${esc(l.city || '—')}</td>
         <td class="hide-sm">${l.instagram ? link(igUrl(l.instagram), '@' + l.instagram) : '<small class="muted">sem Instagram</small>'}${l.website ? `<br>${link(l.website, 'site')}` : ''}</td>
@@ -590,6 +590,7 @@ async function viewConfig() {
       <label>Frequência de pesquisa<select name="research_frequency">${[['manual', 'Manual'], ['semanal', 'Semanal'], ['quinzenal', 'Quinzenal']].map(([v, l]) => `<option value="${v}" ${s.research_frequency === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
       <label>Meta semanal de novos leads<input type="number" name="weekly_target" min="1" max="200" value="${s.weekly_target}"></label>
       <label>Nota prioritária<input type="number" name="priority_threshold" min="0" max="100" value="${s.priority_threshold}"></label>
+      <label>Estrutura mínima para prioridade (de 35)<input type="number" name="priority_min_structure" min="0" max="35" value="${s.priority_min_structure}"></label>
       <label>Nota de lead qualificado<input type="number" name="qualified_threshold" min="0" max="100" value="${s.qualified_threshold}"></label>
       <label>Dias mínimos antes da retomada<input type="number" name="followup_min_days" min="1" max="60" value="${s.followup_min_days}"></label>
       <label class="full">Especialidades de interesse (uma por linha)<textarea name="specialties">${esc(s.specialties.join('\n'))}</textarea></label>
@@ -602,7 +603,7 @@ async function viewConfig() {
     const d = formData(e.target);
     const lines = (v) => String(v || '').split('\n').map((x) => x.trim()).filter(Boolean);
     const body = { regions: lines(d.regions), active_region: d.active_region, research_frequency: d.research_frequency, specialties: lines(d.specialties),
-      weekly_target: Number(d.weekly_target), priority_threshold: Number(d.priority_threshold), qualified_threshold: Number(d.qualified_threshold), followup_min_days: Number(d.followup_min_days) };
+      weekly_target: Number(d.weekly_target), priority_threshold: Number(d.priority_threshold), priority_min_structure: Number(d.priority_min_structure), qualified_threshold: Number(d.qualified_threshold), followup_min_days: Number(d.followup_min_days) };
     if (!body.regions.includes(body.active_region)) body.active_region = body.regions[0];
     await run(() => api('PUT', '/api/settings', body), 'Configurações salvas');
     router();
