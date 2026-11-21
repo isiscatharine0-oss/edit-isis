@@ -21,7 +21,15 @@ const instagram = {
 
 const PROVIDERS = [manual, googlePlaces, instagram];
 
-function list() { return PROVIDERS.map((p) => ({ id: p.id, label: p.label, ...p.status() })); }
+// Integrações pagas ficam bloqueadas enquanto allow_paid_integrations for false.
+function statusOf(p, settings = {}) {
+  const st = p.status();
+  if (p.paid && !settings.allow_paid_integrations) {
+    return { ...st, available: false, paid: true, detail: 'Integração paga desativada: decisão de operar sem custos. ' + st.detail };
+  }
+  return { ...st, paid: !!p.paid };
+}
+function list(settings) { return PROVIDERS.map((p) => ({ id: p.id, label: p.label, ...statusOf(p, settings) })); }
 function get(id) { return PROVIDERS.find((p) => p.id === id); }
 
-module.exports = { list, get };
+module.exports = { list, get, statusOf };

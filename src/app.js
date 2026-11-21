@@ -21,9 +21,9 @@ function createApp(db) {
 
   on('GET', '/api/meta', () => ({
     statuses: LEAD_STATUSES, reliability: RELIABILITY, hook_types: HOOK_TYPES, interaction_kinds: INTERACTION_KINDS,
-    reference_labels: REFERENCE_LABELS, criteria: store.activeCriteria(), providers: providers.list(), settings: store.getSettings(),
+    reference_labels: REFERENCE_LABELS, criteria: store.activeCriteria(), providers: providers.list(store.getSettings()), settings: store.getSettings(),
   }));
-  on('GET', '/api/overview', () => ({ metrics: store.metrics({}).totals, pending: store.pendingActions(), providers: providers.list(), runs: store.listRuns().slice(0, 5) }));
+  on('GET', '/api/overview', () => ({ metrics: store.metrics({}).totals, pending: store.pendingActions(), providers: providers.list(store.getSettings()), runs: store.listRuns().slice(0, 5) }));
 
   on('GET', '/api/leads', ({ query }) => store.listLeads(query));
   on('POST', '/api/leads', ({ body }) => {
@@ -52,9 +52,10 @@ function createApp(db) {
   on('POST', '/api/runs/provider', async ({ body }) => {
     const prov = providers.get(body.provider);
     if (!prov || !prov.search) throw new RuleError('Provedor indisponível para busca automática.');
-    if (!prov.status().available) throw new RuleError(`Provedor não configurado: ${prov.status().detail}`);
+    const st = providers.statusOf(prov, store.getSettings());
+    if (!st.available) throw new RuleError(`Provedor indisponível: ${st.detail}`);
     const runId = store.startRun({ label: body.label, region: body.region, specialties: [body.query], sources: [prov.label],
-      limitations: prov.status().tested ? [] : ['Integração ainda não validada: revise os resultados.'] });
+      limitations: st.tested ? [] : ['Integração ainda não validada: revise os resultados.'] });
     try {
       const cands = await prov.search({ query: body.query, region: body.region, maxResults: body.max_results || 10 });
       const { counts, details } = store.ingestCandidates(runId, cands, `provedor:${prov.id}`, false);

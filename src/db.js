@@ -198,6 +198,7 @@ const DEFAULT_SETTINGS = {
   followup_min_days: 4,
   max_qualification_questions: 2,
   avoid_phrases: [],
+  allow_paid_integrations: false,     // decisão da Isis: operar sem custos até nova autorização
 };
 
 function nowIso() { return new Date().toISOString(); }

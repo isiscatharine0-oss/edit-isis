@@ -44,4 +44,4 @@ async function search({ query, region, maxResults = 10 }, fetchImpl = fetch) {
   });
 }
 
-module.exports = { id: 'google_places', label: 'Google Maps — Places API (New)', status, search };
+module.exports = { id: 'google_places', label: 'Google Maps — Places API (New)', paid: true, status, search };

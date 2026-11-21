@@ -214,3 +214,15 @@ test('reimportar a mesma pesquisa não duplica evidências', () => {
   store.importRun(payload);
   assert.equal(store.listLeads()[0] && store.getLead(store.listLeads()[0].id).evidence.length, 1);
 });
+
+test('integrações pagas ficam bloqueadas por padrão (operação sem custos)', () => {
+  const { store } = fresh();
+  const providers = require('../src/providers');
+  process.env.GOOGLE_PLACES_API_KEY = 'chave-teste';
+  try {
+    const gp = providers.list(store.getSettings()).find((p) => p.id === 'google_places');
+    assert.equal(store.getSettings().allow_paid_integrations, false);
+    assert.equal(gp.available, false);
+    assert.match(gp.detail, /sem custos/);
+  } finally { delete process.env.GOOGLE_PLACES_API_KEY; }
+});

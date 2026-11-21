@@ -46,12 +46,17 @@ migrar para Postgres/Supabase trocando apenas `src/db.js`.
 
 > `node:sqlite` ainda é marcado como experimental no Node 22; o aviso é suprimido nos scripts. Está isolado em `src/db.js`.
 
+## Decisões registradas
+
+- **21/11/2026 — Operação sem custos.** Integrações pagas ficam bloqueadas (`allow_paid_integrations: false`) até nova autorização da Isis.
+- **21/11/2026 — Por que as referências atraem:** perfis consolidados, com estrutura que aparenta comportar investimento alto. O sistema traduz isso em evidências de estrutura (consultório próprio, atendimento particular, equipe, expansão), nunca em orçamento presumido.
+
 ## Integrações — o que está disponível de verdade
 
 | Integração | Situação | Observação |
 |---|---|---|
 | Cadastro manual e importação JSON | ✅ Funcional e testada | Toda evidência exige fonte; pesquisa exige URL e data de consulta. |
-| Google Places API (New) | ⚠️ Implementada, **não testada** | Requer `GOOGLE_PLACES_API_KEY` e liberação de `places.googleapis.com` na rede. É paga (há franquia mensal gratuita; confira a tabela atual do Google antes de ativar). Retorna só candidatos, sem sinais de ICP. |
+| Google Places API (New) | ⛔ **Bloqueada** (decisão: operar sem custos) · implementada, não testada | Requer `GOOGLE_PLACES_API_KEY` e liberação de `places.googleapis.com` na rede. É paga (há franquia mensal gratuita; confira a tabela atual do Google antes de ativar). Retorna só candidatos, sem sinais de ICP. |
 | Instagram Graph API (Business Discovery) | ❌ Não implementada | Exige conta Profissional da Isis conectada via OAuth da Meta e app aprovado; só lê contas profissionais; **não busca perfis por nicho/região** e **não permite mensagem fria**. |
 | Envio de mensagens | Manual | "Copiar e abrir perfil" + "Confirmar que enviei". Aprovação ≠ envio. |
 | IA generativa (ex.: Claude API) para redigir | ❌ Não ativada | O MVP usa modelos locais sem custo. Ativar um provedor de IA tem custo por uso e depende da sua autorização. |
