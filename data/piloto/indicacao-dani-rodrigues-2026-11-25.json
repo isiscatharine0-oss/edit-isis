@@ -1,0 +1,74 @@
+{
+  "origin": "usuaria",
+  "run": {
+    "label": "Indicação da Isis — Dra. Dani Rodrigues",
+    "region": "Salvador - BA",
+    "sources": [
+      "Captura do Instagram enviada pela Isis (25/11/2026)"
+    ],
+    "limitations": [
+      "Somente bio e destaques visíveis; estrutura do consultório e atendimento particular não confirmados."
+    ]
+  },
+  "leads": [
+    {
+      "name": "Dra. Daniela Rios O. Rodrigues",
+      "address_as": "Dra. Dani",
+      "specialty": "Cirurgia estética facial e bucomaxilofacial (odontologia)",
+      "city": "Salvador",
+      "instagram": "@dra__danirodrigues",
+      "registry": "CRO-BA 10327",
+      "notes": "Indicada pela Isis em 25/11/2026. Isis já segue o perfil. Estrutura do consultório ainda não verificada.",
+      "user_decision": {
+        "decision": "aprovar",
+        "notes": "Isis: \"Quero prospectar ela\" (25/11/2026)."
+      },
+      "evidence": [
+        {
+          "criterion": "autoridade",
+          "signal": "trajetoria_verificavel",
+          "description": "Bio: \"Dra Daniela Rios O.Rodrigues CroBa10327 · Pós em Cirurgia Estética Facial e BucomaxiloFacial\".",
+          "source_name": "Instagram — captura de tela enviada pela Isis",
+          "url": "https://www.instagram.com/dra__danirodrigues/",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-25",
+          "origin": "usuaria"
+        },
+        {
+          "criterion": "autoridade",
+          "signal": "especializacao_diferencial",
+          "description": "Bio e destaques focados em procedimentos cirúrgicos faciais: lifting de pescoço, face e olhos, LipoHD de papada, cervicoplastia, lipo + platisma, \"Papada Zero\".",
+          "source_name": "Instagram — captura de tela enviada pela Isis",
+          "url": "https://www.instagram.com/dra__danirodrigues/",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-25",
+          "origin": "usuaria"
+        },
+        {
+          "criterion": "geral",
+          "signal": null,
+          "description": "307 posts, 9.620 seguidores, 7.896 seguindo; categoria \"Criador de conteúdo digital\"; link da bio direto para WhatsApp. Destaques com muitos \"antes e depois\".",
+          "source_name": "Instagram — captura de tela enviada pela Isis",
+          "url": "https://www.instagram.com/dra__danirodrigues/",
+          "reliability": "observado",
+          "consulted_at": "2026-11-25",
+          "origin": "usuaria",
+          "hook_type": "outro",
+          "hook_text": "mostra no perfil a diferença entre os procedimentos cirúrgicos da face, como lifting, cervicoplastia e lipo de papada"
+        }
+      ],
+      "outreach": [
+        {
+          "channel": "ideia",
+          "approve": false,
+          "idea": {
+            "observacao": "mostra os resultados de procedimentos cirúrgicos da face, como o lifting de pescoço e a lipo de papada",
+            "nome": "Preenchimento ou cirurgia?",
+            "descricao": "pegar uma queixa comum, como papada, pescoço flácido ou contorno do rosto, e explicar quando procedimentos menos invasivos ajudam e quando o caso pede cirurgia",
+            "porque": "entender que cada queixa tem um caminho certo, reforçando sua autoridade como cirurgiã"
+          }
+        }
+      ]
+    }
+  ]
+}
