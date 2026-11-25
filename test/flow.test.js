@@ -267,7 +267,17 @@ test('ideia de conteúdo reproduz a estrutura da mensagem real da Isis', () => {
     descricao: 'partir de situações que muitas pessoas normalizam com o passar dos anos', porque: 'perceber que envelhecer bem não é aceitar todo desconforto' } });
   assert.match(m.text, /^Oi, Dra\. Mirela! Conheci seu perfil e gostei muito da forma como você fala sobre longevidade/);
   assert.match(m.text, /quadro chamado “Isso é da idade mesmo\?”\. Em cada vídeo, você poderia partir/);
-  assert.match(m.text, /O que você acha dessa ideia\?$/);
+  assert.match(m.text, /Sou a Isis, da Isis Social Media.*Teria interesse em conversar sobre esse trabalho para o seu perfil\?$/s);
   assert.equal(m.channel, 'ideia');
   assert.deepEqual(m.warnings.filter((w) => w.code === 'longa'), []);
+});
+
+test('ideia com elogio na abertura e sem apresentação quando desmarcado', () => {
+  const { store } = fresh();
+  const { lead } = store.createLead({ name: 'Dra. Elogio Teste', city: 'Salvador' });
+  store.addEvidence(lead.id, ev());
+  store.decideLead(lead.id, 'aprovar');
+  const m = store.generateMessage(lead.id, { channel: 'ideia', idea: { elogio: 'Fiquei impressionada com seus resultados', nome: 'Q', descricao: 'mostrar algo', apresentar: false } });
+  assert.match(m.text, /^Oi, Dra\. Elogio! Tudo bem\? Fiquei impressionada com seus resultados\./);
+  assert.match(m.text, /O que você acha dessa ideia\?$/);
 });

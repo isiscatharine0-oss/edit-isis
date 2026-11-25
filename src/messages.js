@@ -122,18 +122,28 @@ function generate(p) {
 // Formato "ideia de conteúdo" — estrutura extraída de uma mensagem real da Isis (set/2026):
 // observação específica sobre como a pessoa comunica → ideia concreta de quadro → por que combina → pergunta aberta.
 // A ideia em si é criativa: vem da Isis (ou de um rascunho escrito com ela); o sistema só monta e valida.
+// Ajuste da Isis (25/11/2026): abrir com um elogio específico e fechar com apresentação + convite para conversar.
+const ISIS_INTRO = 'Sou a Isis, da Isis Social Media, e trabalho com estratégia e gestão de redes sociais para profissionais da saúde.';
+const ISIS_CLOSE = 'O que achou da ideia? Teria interesse em conversar sobre esse trabalho para o seu perfil?';
+
 function generateIdea(lead, idea) {
-  const need = ['observacao', 'nome', 'descricao'];
-  for (const k of need) if (!String((idea || {})[k] || '').trim()) throw new Error('Preencha observação, nome do quadro e descrição da ideia.');
+  idea = idea || {};
+  const need = ['nome', 'descricao'];
+  if (!String(idea.elogio || idea.observacao || '').trim() || need.some((k) => !String(idea[k] || '').trim())) {
+    throw new Error('Preencha o elogio (ou a observação), o nome do quadro e a descrição da ideia.');
+  }
   const clean = (s) => String(s).trim().replace(/[.!\s]+$/, '');
   const obs = clean(idea.observacao).replace(/^(a forma como )?(você )/i, '');
   const desc = clean(idea.descricao).replace(/^(em cada vídeo, )?(você )?(poderia )/i, '');
   const why = idea.porque ? clean(idea.porque).replace(/^(pode )?(ajudar )?(o público a )/i, '') : '';
   const t = addressOf(lead);
-  return `Oi, ${t}! Conheci seu perfil e gostei muito da forma como você ${obs}.\n\n`
-    + `Enquanto olhava seus conteúdos, tive a ideia de um quadro chamado “${clean(idea.nome).replace(/^["“]|["”]$/g, '')}”. Em cada vídeo, você poderia ${desc}.`
-    + (why ? ` Acredito que esse formato combina muito com a sua proposta e pode ajudar o público a ${why}.` : '')
-    + `\n\nO que você acha dessa ideia?`;
+  const opening = idea.elogio ? `Oi, ${t}! Tudo bem? ${clean(idea.elogio)}.` : `Oi, ${t}! Conheci seu perfil e gostei muito da forma como você ${obs}.`;
+  const reason = idea.porque_frase ? ` ${clean(idea.porque_frase)}.`
+    : why ? ` Acredito que esse formato combina muito com a sua proposta e pode ajudar o público a ${why}.` : '';
+  const closing = idea.apresentar === false ? 'O que você acha dessa ideia?' : `${ISIS_INTRO} ${ISIS_CLOSE}`;
+  return `${opening}\n\n`
+    + `Enquanto olhava seus conteúdos, tive a ideia de um quadro chamado “${clean(idea.nome).replace(/^["“]|["”]$/g, '')}”. Em cada vídeo, você poderia ${desc}.${reason}`
+    + `\n\n${closing}`;
 }
 
 // ---- Validação: regras do estilo da Isis ----
@@ -160,9 +170,10 @@ function validate(text, opts = {}) {
   for (const r of HARD_RULES) if (r.re.test(text)) errors.push({ code: r.code, message: r.message });
   for (const r of SOFT_RULES) {
     if (r.purposes && !r.purposes.includes(purpose)) continue;
+    if (r.code === 'pitch_primeiro_contato' && opts.channel === 'ideia') continue; // apresentação no fim é escolha da Isis
     if (r.re.test(text)) warnings.push({ code: r.code, message: r.message });
   }
-  const limit = purpose === 'resposta' ? 600 : opts.channel === 'story' ? 160 : opts.channel === 'ideia' ? 800 : 350;
+  const limit = purpose === 'resposta' ? 600 : opts.channel === 'story' ? 160 : opts.channel === 'ideia' ? 900 : 350;
   if (text.length > limit) warnings.push({ code: 'longa', message: `Mensagem longa (${text.length} caracteres; ideal até ${limit}).` });
   if ((text.match(/!/g) || []).length > 3) warnings.push({ code: 'exclamacoes', message: 'Muitas exclamações.' });
   for (const ph of avoidPhrases) {

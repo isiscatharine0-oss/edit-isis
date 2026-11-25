@@ -13,7 +13,7 @@
   "leads": [
     {
       "name": "Dra. Daniela Rios O. Rodrigues",
-      "address_as": "Dra. Dani",
+      "address_as": "Dra. Daniela",
       "specialty": "Cirurgia estética facial e bucomaxilofacial (odontologia)",
       "city": "Salvador",
       "instagram": "@dra__danirodrigues",
@@ -62,10 +62,10 @@
           "channel": "ideia",
           "approve": false,
           "idea": {
-            "observacao": "mostra os resultados de procedimentos cirúrgicos da face, como o lifting de pescoço e a lipo de papada",
-            "nome": "Preenchimento ou cirurgia?",
-            "descricao": "pegar uma queixa comum, como papada, pescoço flácido ou contorno do rosto, e explicar quando procedimentos menos invasivos ajudam e quando o caso pede cirurgia",
-            "porque": "entender que cada queixa tem um caminho certo, reforçando sua autoridade como cirurgiã"
+            "elogio": "Fiquei impressionada com os resultados de lifting e de lipo de papada que você compartilha nos destaques, dá pra ver o cuidado que você tem com cada caso",
+            "nome": "Do dia 1 ao dia 30",
+            "descricao": "mostrar como é a recuperação de um procedimento, como o lifting ou a lipo de papada: o que é normal no primeiro dia, na primeira semana e no primeiro mês",
+            "porque_frase": "A recuperação é uma das maiores dúvidas de quem pensa em operar, e esse formato tira o medo e aproxima o paciente de você"
           }
         }
       ]

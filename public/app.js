@@ -352,10 +352,12 @@ function renderOutreachTab(tab, d) {
       ${hooks.length ? `<form id="gen-form" class="actions"><label style="flex:1;min-width:240px">Fato real usado como referência<select name="evidence_id">${hooks.map((e) => `<option value="${e.id}">${esc(META.hook_types[e.hook_type])}: ${esc(e.hook_text)}</option>`).join('')}</select></label>
         <label>Canal<select name="channel"><option value="direct">Direct (mensagem)</option><option value="story">Resposta a story</option><option value="ideia">Ideia de conteúdo (estilo Isis)</option></select></label>
         <div class="form-grid" id="idea-fields" hidden style="flex-basis:100%">
-          <label class="full">Gostei muito da forma como você…<input name="observacao" placeholder="fala sobre longevidade a partir da prevenção"></label>
+          <label class="full">Elogio específico (abre a mensagem)<input name="elogio" placeholder="Fiquei impressionada com os resultados que você mostra nos destaques"></label>
+          <label class="full">ou: Gostei muito da forma como você…<input name="observacao" placeholder="fala sobre longevidade a partir da prevenção"></label>
           <label>Nome do quadro<input name="nome" placeholder="Isso é da idade mesmo?"></label>
           <label class="full">Em cada vídeo, você poderia…<input name="descricao" placeholder="partir de situações que as pessoas normalizam…"></label>
-          <label class="full">Pode ajudar o público a… (opcional)<input name="porque" placeholder="perceber que envelhecer bem…"></label></div>
+          <label class="full">Pode ajudar o público a… (opcional)<input name="porque" placeholder="perceber que envelhecer bem…"></label>
+          <label class="full check"><input type="checkbox" name="apresentar" checked> Terminar com apresentação da Isis Social Media e convite para conversar</label></div>
         <button class="btn primary" type="submit" ${!approved || sentInitial || l.do_not_contact ? 'disabled' : ''}>Gerar mensagem inicial</button></form>`
         : '<p class="muted">Nenhum fato verificável marcado como referência de abordagem. Na aba Evidências, marque “usar como referência”.</p>'}
       <div class="actions" style="margin-top:.6rem"><button class="btn" data-action="followup" ${!sentInitial || l.do_not_contact ? 'disabled' : ''}>Gerar retomada (máx. 1)</button>
@@ -387,7 +389,7 @@ function renderOutreachTab(tab, d) {
     gen.addEventListener('submit', async (e) => {
       e.preventDefault();
       const body = { purpose: 'inicial', evidence_id: gen.evidence_id.value, channel: gen.channel.value };
-      if (body.channel === 'ideia') body.idea = { observacao: gen.observacao.value, nome: gen.nome.value, descricao: gen.descricao.value, porque: gen.porque.value };
+      if (body.channel === 'ideia') body.idea = { elogio: gen.elogio.value, observacao: gen.observacao.value, nome: gen.nome.value, descricao: gen.descricao.value, porque: gen.porque.value, apresentar: gen.apresentar.checked };
       await run(() => api('POST', `/api/leads/${l.id}/messages`, body), 'Rascunho gerado'); viewLead(l.id);
     });
   }

@@ -55,6 +55,8 @@ migrar para Postgres/Supabase trocando apenas `src/db.js`.
 - **21/11/2026 — Regra de prioridade:** prioritário exige nota ≥ 90 **e** estrutura ≥ 20/35 (`priority_min_structure`). Nota alta com estrutura fraca recebe o alerta "estrutura insuficiente para o ticket".
 - **21/11/2026 — Piloto:** os 5 profissionais foram aprovados pela Isis após ver o Instagram (`data/piloto/instagram-e-decisoes-2026-11-21.json`).
 
+- **25/11/2026 — Formato da primeira mensagem (Isis):** abrir com elogio específico, propor uma ideia de quadro e terminar com apresentação da Isis Social Media + convite para conversar sobre o serviço. Substitui a regra inicial de não apresentar o serviço no primeiro contato (no formato "ideia de conteúdo").
+
 ## Integrações — o que está disponível de verdade
 
 | Integração | Situação | Observação |

@@ -267,7 +267,7 @@ function createStore(db) {
       if (!solid) throw new RuleError('Registre ao menos uma evidência real do perfil antes de propor uma ideia.');
       try { text = messages.generateIdea(lead, opts.idea); } catch (e) { throw new RuleError(e.message); }
       channel = 'ideia'; generator = 'estilo-isis-ideia';
-      referenceText = `Ideia de conteúdo: “${String(opts.idea.nome).trim()}” — a partir de: ${String(opts.idea.observacao).trim()}`;
+      referenceText = `Ideia de conteúdo: “${String(opts.idea.nome).trim()}” — a partir de: ${String(opts.idea.observacao || opts.idea.elogio).trim()}`;
     } else if (purpose === 'inicial') {
       if (sentInitial) throw new RuleError('A mensagem inicial já foi enviada. Use retomada ou resposta.');
       const evs = q("SELECT * FROM evidence WHERE lead_id = ? AND hook_type IS NOT NULL AND reliability <> 'hipotese' ORDER BY id DESC").all(leadId);
