@@ -267,7 +267,7 @@ test('ideia de conteúdo reproduz a estrutura da mensagem real da Isis', () => {
     descricao: 'partir de situações que muitas pessoas normalizam com o passar dos anos', porque: 'perceber que envelhecer bem não é aceitar todo desconforto' } });
   assert.match(m.text, /^Oi, Dra\. Mirela! Conheci seu perfil e gostei muito da forma como você fala sobre longevidade/);
   assert.match(m.text, /quadro chamado “Isso é da idade mesmo\?”\. Em cada vídeo, você poderia partir/);
-  assert.match(m.text, /Sou a Isis, da Isis Social Media.*Teria interesse em conversar sobre esse trabalho para o seu perfil\?$/s);
+  assert.match(m.text, /Sou a Isis e trabalho com estratégia e gestão de redes sociais\..*Teria interesse em conversar sobre esse trabalho para o seu perfil\?$/s);
   assert.equal(m.channel, 'ideia');
   assert.deepEqual(m.warnings.filter((w) => w.code === 'longa'), []);
 });

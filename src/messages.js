@@ -123,7 +123,8 @@ function generate(p) {
 // observação específica sobre como a pessoa comunica → ideia concreta de quadro → por que combina → pergunta aberta.
 // A ideia em si é criativa: vem da Isis (ou de um rascunho escrito com ela); o sistema só monta e valida.
 // Ajuste da Isis (25/11/2026): abrir com um elogio específico e fechar com apresentação + convite para conversar.
-const ISIS_INTRO = 'Sou a Isis, da Isis Social Media, e trabalho com estratégia e gestão de redes sociais para profissionais da saúde.';
+// Frase editada pela própria Isis em 25/11/2026 (versão enviada à Dra. Rosilet).
+const ISIS_INTRO = 'Sou a Isis e trabalho com estratégia e gestão de redes sociais.';
 const ISIS_CLOSE = 'O que achou da ideia? Teria interesse em conversar sobre esse trabalho para o seu perfil?';
 
 function generateIdea(lead, idea) {

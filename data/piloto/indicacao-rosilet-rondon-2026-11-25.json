@@ -73,13 +73,15 @@
       "outreach": [
         {
           "channel": "ideia",
-          "approve": false,
+          "approve": true,
           "idea": {
             "elogio": "Gostei muito de como você explica rinite e asma de um jeito prático, como no post de acertos e erros da rinite alérgica, dá pra aplicar no dia a dia na hora",
             "nome": "Alergia tem vacina?",
             "descricao": "responder uma dúvida sobre a imunoterapia: pra quem é indicada, como funciona, quanto tempo dura e o que muda na rotina de quem tem rinite ou asma",
             "porque_frase": "Muita gente nem sabe que esse tratamento existe, e é um diferencial seu que merece ganhar destaque"
-          }
+          },
+          "final_text": "Oi, Dra. Rosilet! Tudo bem? Gostei muito de como você explica rinite e asma de um jeito prático, como no post de acertos e erros da rinite alérgica, dá pra aplicar no dia a dia na hora.\n\nEnquanto olhava seus conteúdos, tive a ideia de um quadro chamado “Alergia tem vacina?”. Em cada vídeo, você poderia responder uma dúvida sobre a imunoterapia: pra quem é indicada, como funciona, quanto tempo dura e o que muda na rotina de quem tem rinite ou asma. Muita gente nem sabe que esse tratamento existe, e é um diferencial seu que merece ganhar destaque.\n\nSou a Isis e trabalho com estratégia e gestão de redes sociais. O que achou da ideia? Teria interesse em conversar sobre esse trabalho para o seu perfil?",
+          "notes": "Versão final editada e enviada no chat pela Isis em 25/11/2026."
         }
       ]
     }

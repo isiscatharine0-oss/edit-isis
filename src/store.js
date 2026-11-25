@@ -508,7 +508,8 @@ function createStore(db) {
   /** Abordagens definidas fora do painel (ex.: no chat): gera o rascunho e registra a aprovação informada. Idempotente. */
   function applyOutreach(leadId, list) {
     for (const o of list || []) {
-      const m = generateMessage(leadId, { purpose: 'inicial', channel: o.channel, idea: o.idea, evidence_id: o.evidence_id });
+      let m = generateMessage(leadId, { purpose: 'inicial', channel: o.channel, idea: o.idea, evidence_id: o.evidence_id });
+      if (o.final_text && o.final_text.trim() !== m.text) m = editMessage(m.id, o.final_text);
       const same = q("SELECT id FROM outreach_message WHERE lead_id = ? AND text = ? AND id <> ? AND approval_status IN ('aprovada','rascunho')").get(leadId, m.text, m.id);
       if (same) { q("UPDATE outreach_message SET approval_status = 'substituida' WHERE id = ?").run(m.id); continue; }
       if (o.approve) decideMessage(m.id, 'aprovar', o.notes || null);
