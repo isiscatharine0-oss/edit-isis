@@ -1,0 +1,87 @@
+{
+  "origin": "usuaria",
+  "run": {
+    "label": "Indicação da Isis — Dra. Rosilet Rondon",
+    "region": "Maringá - PR",
+    "sources": [
+      "Captura do Instagram enviada pela Isis (25/11/2026)"
+    ],
+    "limitations": [
+      "Somente bio, destaques e primeiros posts visíveis; estrutura e atendimento particular não confirmados.",
+      "Fora da região inicial configurada (Salvador/BA)."
+    ]
+  },
+  "leads": [
+    {
+      "name": "Dra. Rosilet Rondon",
+      "address_as": "Dra. Rosilet",
+      "specialty": "Pneumologia (adulto e criança)",
+      "city": "Maringá",
+      "state": "PR",
+      "instagram": "@rosiletpneumologista",
+      "registry": "CRM-PR 36571",
+      "website": "https://lp.rosiletrondonpneumologista.com",
+      "notes": "Indicada pela Isis em 25/11/2026. Fora da região inicial (Salvador/BA): atendimento remoto pela Isis. Estrutura do consultório não verificada.",
+      "user_decision": {
+        "decision": "aprovar",
+        "notes": "Isis: \"queria mandar mensagem para ela\" (25/11/2026)."
+      },
+      "evidence": [
+        {
+          "criterion": "autoridade",
+          "signal": "trajetoria_verificavel",
+          "description": "Bio: \"CRM-PR 36571 | RQE 35061\", pneumologista.",
+          "source_name": "Instagram — captura de tela enviada pela Isis",
+          "url": "https://www.instagram.com/rosiletpneumologista/",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-25",
+          "origin": "usuaria"
+        },
+        {
+          "criterion": "autoridade",
+          "signal": "especializacao_diferencial",
+          "description": "Bio: \"Ajudo a controlar sua Asma, Rinite e Tosse · Imunoterapia com vacina · atendimento Adulto e Criança · Online/presencial/Domiciliar\".",
+          "source_name": "Instagram — captura de tela enviada pela Isis",
+          "url": "https://www.instagram.com/rosiletpneumologista/",
+          "reliability": "verificado",
+          "consulted_at": "2026-11-25",
+          "origin": "usuaria"
+        },
+        {
+          "criterion": "geral",
+          "signal": null,
+          "description": "Link da bio para landing page própria (lp.rosiletrondonpneumologista.com) e canal de transmissão \"Dicas da Pneumo\" (18 membros). Indício de investimento em captação.",
+          "source_name": "Instagram — captura de tela enviada pela Isis",
+          "url": "https://www.instagram.com/rosiletpneumologista/",
+          "reliability": "observado",
+          "consulted_at": "2026-11-25",
+          "origin": "usuaria"
+        },
+        {
+          "criterion": "geral",
+          "signal": null,
+          "description": "305 posts, 1.729 seguidores, 3.259 seguindo. Aparece em vários vídeos; carrossel \"Rinite alérgica: acertos e erros\"; vídeo \"Pov: como está a sua rinossinusite no inverno?\"; posts pessoais (aniversário da filha, frase de fé). Destaques: Sobre mim, Rinite, Asma, Depoimentos.",
+          "source_name": "Instagram — captura de tela enviada pela Isis",
+          "url": "https://www.instagram.com/rosiletpneumologista/",
+          "reliability": "observado",
+          "consulted_at": "2026-11-25",
+          "origin": "usuaria",
+          "hook_type": "publicacao_educativa",
+          "hook_text": "explicou os acertos e erros no cuidado com a rinite alérgica"
+        }
+      ],
+      "outreach": [
+        {
+          "channel": "ideia",
+          "approve": false,
+          "idea": {
+            "elogio": "Gostei muito de como você explica rinite e asma de um jeito prático, como no post de acertos e erros da rinite alérgica, dá pra aplicar no dia a dia na hora",
+            "nome": "Alergia tem vacina?",
+            "descricao": "responder uma dúvida sobre a imunoterapia: pra quem é indicada, como funciona, quanto tempo dura e o que muda na rotina de quem tem rinite ou asma",
+            "porque_frase": "Muita gente nem sabe que esse tratamento existe, e é um diferencial seu que merece ganhar destaque"
+          }
+        }
+      ]
+    }
+  ]
+}
